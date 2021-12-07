@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.MaxNoseDiameter = new System.Windows.Forms.Label();
+            this.MaxNoseLength = new System.Windows.Forms.Label();
             this.MaxBodyDiameter = new System.Windows.Forms.Label();
             this.MaxBodyLength = new System.Windows.Forms.Label();
             this.MinNoseLength = new System.Windows.Forms.Label();
@@ -120,15 +120,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Параметры для построения модели";
             // 
-            // MaxNoseDiameter
+            // MaxNoseLength
             // 
-            this.MaxNoseDiameter.AutoSize = true;
-            this.MaxNoseDiameter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MaxNoseDiameter.Location = new System.Drawing.Point(412, 97);
-            this.MaxNoseDiameter.Name = "MaxNoseDiameter";
-            this.MaxNoseDiameter.Size = new System.Drawing.Size(21, 15);
-            this.MaxNoseDiameter.TabIndex = 60;
-            this.MaxNoseDiameter.Text = "10";
+            this.MaxNoseLength.AutoSize = true;
+            this.MaxNoseLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MaxNoseLength.Location = new System.Drawing.Point(412, 97);
+            this.MaxNoseLength.Name = "MaxNoseLength";
+            this.MaxNoseLength.Size = new System.Drawing.Size(21, 15);
+            this.MaxNoseLength.TabIndex = 60;
+            this.MaxNoseLength.Text = "10";
             // 
             // MaxBodyDiameter
             // 
@@ -512,6 +512,7 @@
             // 
             // WingsCountComboBox
             // 
+            this.WingsCountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WingsCountComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.WingsCountComboBox.FormattingEnabled = true;
             this.WingsCountComboBox.Items.AddRange(new object[] {
@@ -657,6 +658,7 @@
             // 
             // GuidingsCountComboBox
             // 
+            this.GuidingsCountComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.GuidingsCountComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GuidingsCountComboBox.FormattingEnabled = true;
             this.GuidingsCountComboBox.Items.AddRange(new object[] {
@@ -809,7 +811,7 @@
             this.GeneralParametersGroupBox.Controls.Add(this.BodyDiameterTextBox);
             this.GeneralParametersGroupBox.Controls.Add(this.label2);
             this.GeneralParametersGroupBox.Controls.Add(this.label6);
-            this.GeneralParametersGroupBox.Controls.Add(this.MaxNoseDiameter);
+            this.GeneralParametersGroupBox.Controls.Add(this.MaxNoseLength);
             this.GeneralParametersGroupBox.Controls.Add(this.BodyLengthTextBox);
             this.GeneralParametersGroupBox.Controls.Add(this.label23);
             this.GeneralParametersGroupBox.Controls.Add(this.label34);
@@ -898,6 +900,8 @@
             this.Controls.Add(this.BuildButton);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MaximumSize = new System.Drawing.Size(515, 479);
+            this.MinimumSize = new System.Drawing.Size(515, 479);
             this.Name = "MainForm";
             this.Text = "Создание модели ракеты";
             ((System.ComponentModel.ISupportInitialize)(this.BodyWidthErrorIcon)).EndInit();
@@ -946,7 +950,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label MaxNoseDiameter;
+        private System.Windows.Forms.Label MaxNoseLength;
         private System.Windows.Forms.Label MaxBodyDiameter;
         private System.Windows.Forms.Label MaxBodyLength;
         private System.Windows.Forms.Label MinNoseLength;
