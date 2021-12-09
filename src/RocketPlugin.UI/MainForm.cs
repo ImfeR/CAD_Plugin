@@ -29,7 +29,7 @@
             WingsWidthTextBox.Text = _parameters.WingsWidth.ToString();
 
             GuidingsCountComboBox.SelectedItem = _parameters.GuidesCount.ToString();
-            GuidingsInnderRibLengthTextBox.Text = _parameters.GuidesInnerRibLength.ToString();
+            GuidingsInnerRibLengthTextBox.Text = _parameters.GuidesInnerRibLength.ToString();
 
             ChangeMinMaxLabels(nameof(RocketParameters.BodyDiameter));
             ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
@@ -53,102 +53,48 @@
                 BodyLengthErrorIcon.Visible = true;
             }
 
-            ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
+            OnChangeBodyLengthParameter();
         }
 
         private void BodyDiameterTextBox_Leave(object sender, EventArgs e)
         {
             if(!double.TryParse(BodyDiameterTextBox.Text, out var value))
             {
-                BodyWidthErrorIcon.Visible = true;
+                BodyDiameterErrorIcon.Visible = true;
                 return;
             }
 
             try
             {
                 _parameters.BodyDiameter = value;
-                BodyWidthErrorIcon.Visible = false;
+                BodyDiameterErrorIcon.Visible = false;
             }
             catch
             {
-                BodyWidthErrorIcon.Visible = true;
+                BodyDiameterErrorIcon.Visible = true;
             }
+
+            OnChangeBodyWidthParameter();
         }
 
         private void NoseLengthTextBox_Leave(object sender, EventArgs e)
         {
-            if(!double.TryParse(NoseLengthTextBox.Text, out var value))
-            {
-                NoseLengthErrorIcon.Visible = true;
-                return;
-            }
-
-            try
-            {
-                _parameters.NoseLength = value;
-                NoseLengthErrorIcon.Visible = false;
-            }
-            catch
-            {
-                NoseLengthErrorIcon.Visible = true;
-            }
+            CheckParameterValuesValidity();
         }
 
         private void WingsLengthTextBox_Leave(object sender, EventArgs e)
         {
-            if (!double.TryParse(WingsLengthTextBox.Text, out var value))
-            {
-                WingsLengthErrorIcon.Visible = true;
-                return;
-            }
-
-            try
-            {
-                _parameters.WingsLength = value;
-                WingsLengthErrorIcon.Visible = false;
-            }
-            catch
-            {
-                WingsLengthErrorIcon.Visible = true;
-            }
+            CheckParameterValuesValidity();
         }
 
         private void WingsWidthTextBox_Leave(object sender, EventArgs e)
         {
-            if (!double.TryParse(WingsWidthTextBox.Text, out var value))
-            {
-                WingsWidthErrorIcon.Visible = true;
-                return;
-            }
-
-            try
-            {
-                _parameters.WingsWidth = value;
-                WingsWidthErrorIcon.Visible = false;
-            }
-            catch
-            {
-                WingsWidthErrorIcon.Visible = true;
-            }
+            CheckParameterValuesValidity();
         }
 
         private void GuidingsInnderRibLengthTextBox_Leave(object sender, EventArgs e)
         {
-            if (!double.TryParse(GuidingsInnderRibLengthTextBox.Text, out var value))
-            {
-                GuidingsInnderRibLengthErrorIcon.Visible = true;
-                return;
-            }
-
-            try
-            {
-                _parameters.WingsWidth = value;
-                GuidingsInnderRibLengthErrorIcon.Visible = false;
-            }
-            catch
-            {
-                GuidingsInnderRibLengthErrorIcon.Visible = true;
-            }
+            CheckParameterValuesValidity();
         }
 
         private void GuidingsCountComboBox_SelectedValueChanged(object sender, EventArgs e)
@@ -185,14 +131,10 @@
                     MaxGuidesInnerRibLength.Text = (_parameters.BodyLength * 
                         _parameters.MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER).ToString();
 
-                    MinBodyDiameter.Text = _parameters.BodyLength * 
-                        _parameters.MIN_BODY_DIAMTER_MULTIPLIER > _parameters.MIN_BODY_DIAMTER ? 
-                        (_parameters.BodyLength * _parameters.MIN_BODY_DIAMTER_MULTIPLIER).ToString() :
-                        _parameters.MIN_BODY_DIAMTER.ToString();
-                    MaxBodyDiameter.Text = _parameters.BodyLength * 
-                        _parameters.MAX_BODY_DIAMTER_MULTIPLIER < _parameters.MAX_BODY_DIAMTER ? 
-                        (_parameters.BodyLength * _parameters.MAX_BODY_DIAMTER_MULTIPLIER).ToString() :
-                        _parameters.MAX_BODY_DIAMTER.ToString();
+                    MinBodyDiameter.Text = (_parameters.BodyLength *
+                        _parameters.MIN_BODY_DIAMTER_MULTIPLIER).ToString();
+                    MaxBodyDiameter.Text = (_parameters.BodyLength * 
+                        _parameters.MAX_BODY_DIAMTER_MULTIPLIER).ToString();
                     break;
                 case nameof(RocketParameters.BodyDiameter):
                     MaxWingsWidth.Text = (_parameters.BodyDiameter * 
@@ -201,6 +143,97 @@
                         _parameters.MIN_WING_WIDTH_MULTIPLIER).ToString();
                     break;
             }
+        }
+
+        private void OnChangeBodyLengthParameter()
+        {
+            ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
+            CheckParameterValuesValidity();
+        }
+
+        private void OnChangeBodyWidthParameter()
+        {
+            ChangeMinMaxLabels(nameof(RocketParameters.BodyDiameter));
+            CheckParameterValuesValidity();
+        }
+
+        private void CheckParameterValuesValidity()
+        {
+            BuildButton.Enabled = true;
+
+            try
+            {
+                _parameters.BodyLength = double.Parse(BodyLengthTextBox.Text);
+                BodyLengthErrorIcon.Visible = false;
+            }
+            catch 
+            {
+                BodyLengthErrorIcon.Visible = true;
+                BuildButton.Enabled = false;
+            }
+
+            try
+            {
+                _parameters.BodyDiameter = double.Parse(BodyDiameterTextBox.Text);
+                BodyDiameterErrorIcon.Visible = false;
+            }
+            catch
+            {
+                BodyDiameterErrorIcon.Visible = true;
+                BuildButton.Enabled = false;
+            }
+
+            try
+            {
+                _parameters.NoseLength = double.Parse(NoseLengthTextBox.Text);
+                NoseLengthErrorIcon.Visible = false;
+            }
+            catch
+            {
+                NoseLengthErrorIcon.Visible = true;
+                BuildButton.Enabled = false;
+            }
+
+            try
+            {
+                _parameters.WingsLength = double.Parse(WingsLengthTextBox.Text);
+                WingsLengthErrorIcon.Visible = false;
+            }
+            catch
+            {
+                WingsLengthErrorIcon.Visible = true;
+                BuildButton.Enabled = false;
+            }
+
+            try
+            {
+                _parameters.WingsWidth = double.Parse(WingsWidthTextBox.Text);
+                WingsWidthErrorIcon.Visible = false;
+            }
+            catch
+            {
+                WingsWidthErrorIcon.Visible = true;
+                BuildButton.Enabled = false;
+            }
+
+            try
+            {
+                _parameters.GuidesInnerRibLength = double.Parse(GuidingsInnerRibLengthTextBox.Text);
+                GuidingsInnderRibLengthErrorIcon.Visible = false;
+            }
+            catch
+            {
+                GuidingsInnderRibLengthErrorIcon.Visible = true;
+                BuildButton.Enabled = false;
+            }
+        }
+
+        private void BuildButton_Click(object sender, EventArgs e)
+        {
+            CheckParameterValuesValidity();
+
+            if (!BuildButton.Enabled)
+                return;
         }
     }
 }

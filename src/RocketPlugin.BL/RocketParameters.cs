@@ -7,9 +7,7 @@
         #region Constants
 
         public double MAX_BODY_DIAMTER_MULTIPLIER = 0.15;
-        public double MAX_BODY_DIAMTER = 3.75;
         public double MIN_BODY_DIAMTER_MULTIPLIER = 0.1;
-        public double MIN_BODY_DIAMTER = 0.1;
 
         public double MAX_BODY_LENGTH = 25;
         public double MIN_BODY_LENGTH = 10;
@@ -54,8 +52,7 @@
             get => _bodyDiameter;
             set
             {   
-                if(!Validator.ValidateValue(MIN_BODY_DIAMTER, MAX_BODY_DIAMTER, value) || 
-                    !Validator.ValidateValue(MIN_BODY_DIAMTER_MULTIPLIER * BodyLength, 
+                if(!Validator.ValidateValue(MIN_BODY_DIAMTER_MULTIPLIER * BodyLength, 
                     MAX_BODY_DIAMTER_MULTIPLIER * BodyLength, value))
                 {
                     throw new ArgumentException("Введено неверное значение диаметра корпуса.");
@@ -133,7 +130,7 @@
                 if (!Validator.ValidateValue( MIN_WING_LENGTH_MULTIPLIER * BodyLength, 
                     MAX_WING_LENGTH_MULTIPLIER * BodyLength, value))
                 {
-                    throw new ArgumentException("Введено неверное длины крыльев.");
+                    throw new ArgumentException("Введено неверная длина крыльев.");
                 }
 
                 _wingsLength = value;
@@ -148,7 +145,7 @@
                 if (!Validator.ValidateValue(MIN_WING_WIDTH_MULTIPLIER * BodyDiameter,
                     MAX_WING_WIDTH_MULTIPLIER * BodyDiameter, value))
                 {
-                    throw new ArgumentException("Введено неверное длины крыльев.");
+                    throw new ArgumentException("Введено неверная ширина крыльев.");
                 }
 
                 _wingsWidth = value;
