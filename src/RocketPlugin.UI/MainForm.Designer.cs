@@ -87,10 +87,10 @@
             this.label38 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.GuidingsInnderRibLengthTextBox = new System.Windows.Forms.TextBox();
+            this.GuidingsInnerRibLengthTextBox = new System.Windows.Forms.TextBox();
             this.BuildButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BodyWidthErrorIcon = new System.Windows.Forms.PictureBox();
+            this.BodyDiameterErrorIcon = new System.Windows.Forms.PictureBox();
             this.BodyLengthErrorIcon = new System.Windows.Forms.PictureBox();
             this.NoseLengthErrorIcon = new System.Windows.Forms.PictureBox();
             this.WingsLengthErrorIcon = new System.Windows.Forms.PictureBox();
@@ -99,7 +99,7 @@
             this.GeneralParametersGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.BodyWidthErrorIcon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BodyDiameterErrorIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BodyLengthErrorIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NoseLengthErrorIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WingsLengthErrorIcon)).BeginInit();
@@ -704,14 +704,14 @@
             this.label15.TabIndex = 4;
             this.label15.Text = "Длина внутренней грани";
             // 
-            // GuidingsInnderRibLengthTextBox
+            // GuidingsInnerRibLengthTextBox
             // 
-            this.GuidingsInnderRibLengthTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GuidingsInnderRibLengthTextBox.Location = new System.Drawing.Point(184, 66);
-            this.GuidingsInnderRibLengthTextBox.Name = "GuidingsInnderRibLengthTextBox";
-            this.GuidingsInnderRibLengthTextBox.Size = new System.Drawing.Size(56, 21);
-            this.GuidingsInnderRibLengthTextBox.TabIndex = 24;
-            this.GuidingsInnderRibLengthTextBox.Leave += new System.EventHandler(this.GuidingsInnderRibLengthTextBox_Leave);
+            this.GuidingsInnerRibLengthTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GuidingsInnerRibLengthTextBox.Location = new System.Drawing.Point(184, 66);
+            this.GuidingsInnerRibLengthTextBox.Name = "GuidingsInnerRibLengthTextBox";
+            this.GuidingsInnerRibLengthTextBox.Size = new System.Drawing.Size(56, 21);
+            this.GuidingsInnerRibLengthTextBox.TabIndex = 24;
+            this.GuidingsInnerRibLengthTextBox.Leave += new System.EventHandler(this.GuidingsInnderRibLengthTextBox_Leave);
             // 
             // BuildButton
             // 
@@ -723,21 +723,22 @@
             this.BuildButton.TabIndex = 4;
             this.BuildButton.Text = "Построить";
             this.BuildButton.UseVisualStyleBackColor = true;
+            this.BuildButton.Click += new System.EventHandler(this.BuildButton_Click);
             // 
             // toolTip1
             // 
             this.toolTip1.ShowAlways = true;
             // 
-            // BodyWidthErrorIcon
+            // BodyDiameterErrorIcon
             // 
-            this.BodyWidthErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
-            this.BodyWidthErrorIcon.Location = new System.Drawing.Point(163, 67);
-            this.BodyWidthErrorIcon.Name = "BodyWidthErrorIcon";
-            this.BodyWidthErrorIcon.Size = new System.Drawing.Size(16, 17);
-            this.BodyWidthErrorIcon.TabIndex = 71;
-            this.BodyWidthErrorIcon.TabStop = false;
-            this.toolTip1.SetToolTip(this.BodyWidthErrorIcon, "Недопустимое значение параметра");
-            this.BodyWidthErrorIcon.Visible = false;
+            this.BodyDiameterErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
+            this.BodyDiameterErrorIcon.Location = new System.Drawing.Point(163, 67);
+            this.BodyDiameterErrorIcon.Name = "BodyDiameterErrorIcon";
+            this.BodyDiameterErrorIcon.Size = new System.Drawing.Size(16, 17);
+            this.BodyDiameterErrorIcon.TabIndex = 71;
+            this.BodyDiameterErrorIcon.TabStop = false;
+            this.toolTip1.SetToolTip(this.BodyDiameterErrorIcon, "Недопустимое значение параметра");
+            this.BodyDiameterErrorIcon.Visible = false;
             // 
             // BodyLengthErrorIcon
             // 
@@ -798,7 +799,7 @@
             // 
             this.GeneralParametersGroupBox.Controls.Add(this.NoseLengthErrorIcon);
             this.GeneralParametersGroupBox.Controls.Add(this.BodyLenghtlabel);
-            this.GeneralParametersGroupBox.Controls.Add(this.BodyWidthErrorIcon);
+            this.GeneralParametersGroupBox.Controls.Add(this.BodyDiameterErrorIcon);
             this.GeneralParametersGroupBox.Controls.Add(this.label5);
             this.GeneralParametersGroupBox.Controls.Add(this.BodyLengthErrorIcon);
             this.GeneralParametersGroupBox.Controls.Add(this.label4);
@@ -872,7 +873,7 @@
             this.groupBox2.Controls.Add(this.GuidingsCountComboBox);
             this.groupBox2.Controls.Add(this.label38);
             this.groupBox2.Controls.Add(this.label15);
-            this.groupBox2.Controls.Add(this.GuidingsInnderRibLengthTextBox);
+            this.groupBox2.Controls.Add(this.GuidingsInnerRibLengthTextBox);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label18);
             this.groupBox2.Controls.Add(this.label22);
@@ -904,7 +905,7 @@
             this.MinimumSize = new System.Drawing.Size(515, 479);
             this.Name = "MainForm";
             this.Text = "Создание модели ракеты";
-            ((System.ComponentModel.ISupportInitialize)(this.BodyWidthErrorIcon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BodyDiameterErrorIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BodyLengthErrorIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NoseLengthErrorIcon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WingsLengthErrorIcon)).EndInit();
@@ -941,7 +942,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TextBox WingsLengthTextBox;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox GuidingsInnderRibLengthTextBox;
+        private System.Windows.Forms.TextBox GuidingsInnerRibLengthTextBox;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.Label label38;
         private System.Windows.Forms.ComboBox WingsCountComboBox;
@@ -985,7 +986,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.PictureBox BodyLengthErrorIcon;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.PictureBox BodyWidthErrorIcon;
+        private System.Windows.Forms.PictureBox BodyDiameterErrorIcon;
         private System.Windows.Forms.GroupBox GeneralParametersGroupBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;

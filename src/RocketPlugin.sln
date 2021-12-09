@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketPlugin.Builder", "Roc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoCADConnector", "AutoCADConnector\AutoCADConnector.csproj", "{B0BBEC3D-BEB1-4ECD-8686-98164ADAD3E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RocketPlugin.Tests", "RocketPlugin.Tests\RocketPlugin.Tests.csproj", "{3D3E3546-84F1-4275-A9B5-60B7A2F6906E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B0BBEC3D-BEB1-4ECD-8686-98164ADAD3E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0BBEC3D-BEB1-4ECD-8686-98164ADAD3E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0BBEC3D-BEB1-4ECD-8686-98164ADAD3E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D3E3546-84F1-4275-A9B5-60B7A2F6906E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D3E3546-84F1-4275-A9B5-60B7A2F6906E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D3E3546-84F1-4275-A9B5-60B7A2F6906E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D3E3546-84F1-4275-A9B5-60B7A2F6906E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
