@@ -2,7 +2,7 @@
 {
     using NUnit.Framework;
 
-    using RocketPlugin.BL;
+    using BL;
 
     using System;
 

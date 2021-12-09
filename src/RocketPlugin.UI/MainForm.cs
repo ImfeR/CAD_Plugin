@@ -1,6 +1,6 @@
 ﻿namespace RocketPlugin.UI
 {
-    using RocketPlugin.BL;
+    using BL;
 
     using System;
     using System.Windows.Forms;
