@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Класс, в котором содержатся параметры для построения модели ракеты.
+    /// </summary>
     public class RocketParameters
     {
         #region Constants
@@ -15,10 +18,10 @@
         public double MAX_NOSE_LENGTH_MULTIPLIER = 0.4;
         public double MIN_NOSE_LENGTH_MULTIPLIER = 0.2;
 
-        public double MAX_WING_WIDTH_MULTIPLIER = 0.3;
-        public double MIN_WING_WIDTH_MULTIPLIER = 0.15;
+        public double MAX_WING_WIDTH_MULTIPLIER = 0.4;
+        public double MIN_WING_WIDTH_MULTIPLIER = 0.2;
 
-        public double MAX_WING_LENGTH_MULTIPLIER = 0.25;
+        public double MAX_WING_LENGTH_MULTIPLIER = 0.35;
         public double MIN_WING_LENGTH_MULTIPLIER = 0.15;
 
         public double MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER = 0.3;
@@ -47,6 +50,9 @@
 
         #region Properties
 
+        /// <summary>
+        /// Димаетр корпуса ракеты.
+        /// </summary>
         public double BodyDiameter 
         { 
             get => _bodyDiameter;
@@ -61,10 +67,13 @@
                 _bodyDiameter = value;
                 WingsDepth = BodyDiameter * 0.1;
                 GuidesDepth = BodyDiameter * 0.1;
-                GuidesWidth = BodyLength * GUIDES_WIDTH_MULTIPLIER;
+                GuidesWidth = BodyDiameter * GUIDES_WIDTH_MULTIPLIER;
             }
         }
 
+        /// <summary>
+        /// Высота корпуса ракеты.
+        /// </summary>
         public double BodyLength 
         {
             get => _bodyLength;
@@ -79,10 +88,19 @@
             }
         }
 
+        /// <summary>
+        /// Количесвто направляющих
+        /// </summary>
         public int GuidesCount { get; set; }
 
+        /// <summary>
+        /// Толщина направляющих.
+        /// </summary>
         public double GuidesDepth { get; set; }
 
+        /// <summary>
+        /// Длина грани направляющей, прилигающей к корпусу ракеты.
+        /// </summary>
         public double GuidesInnerRibLength
         {
             get => _guidesInnerRibLength;
@@ -99,10 +117,19 @@
             }
         }
 
+        /// <summary>
+        /// Длина внешней грани направляющей.
+        /// </summary>
         public double GuidesOuterRibLength { get; set; }
 
+        /// <summary>
+        /// Ширина направляющих.
+        /// </summary>
         public double GuidesWidth { get; set; }
 
+        /// <summary>
+        /// Длина носа ракеты.
+        /// </summary>
         public double NoseLength
         {
             get => _noseLength;
@@ -118,10 +145,19 @@
             }
         }
 
+        /// <summary>
+        /// Количесвто крыльев.
+        /// </summary>
         public int WingsCount { get; set; }
 
+        /// <summary>
+        /// Толщина крыльев.
+        /// </summary>
         public double WingsDepth { get; set; }
 
+        /// <summary>
+        /// Длина крыльев.
+        /// </summary>
         public double WingsLength
         {
             get => _wingsLength;
@@ -137,6 +173,9 @@
             }
         }
 
+        /// <summary>
+        /// Ширина крыльев.
+        /// </summary>
         public double WingsWidth
         {
             get => _wingsWidth;
@@ -156,6 +195,9 @@
 
         #region Constructors
 
+        /// <summary>
+        /// Конструктор по умолчанию, задающий начальные значения параметров.
+        /// </summary>
         public RocketParameters()
         {
             BodyLength = 20;

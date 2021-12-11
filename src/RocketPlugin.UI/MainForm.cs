@@ -2,6 +2,8 @@
 {
     using BL;
 
+    using Builder;
+
     using System;
     using System.Windows.Forms;
                           
@@ -111,6 +113,11 @@
             _parameters.WingsCount = value;
         }
 
+        /// <summary>
+        /// Изменение отображаемых значений max/min у зависимых параметров
+        /// при изменеии основного параметра
+        /// </summary>
+        /// <param name="changedParameterName">Название измененного параметра.</param>
         private void ChangeMinMaxLabels(string changedParameterName)
         {
             switch (changedParameterName)
@@ -157,6 +164,9 @@
             CheckParameterValuesValidity();
         }
 
+        /// <summary>
+        /// Проверка всех значений на валидносить.
+        /// </summary>
         private void CheckParameterValuesValidity()
         {
             BuildButton.Enabled = true;
@@ -234,6 +244,11 @@
 
             if (!BuildButton.Enabled)
                 return;
+
+            RocketBuilder builder = new RocketBuilder(_parameters);
+            builder.Build();
+
+            Close();
         }
     }
 }

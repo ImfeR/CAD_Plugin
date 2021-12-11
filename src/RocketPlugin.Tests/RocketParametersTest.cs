@@ -1,8 +1,8 @@
 ﻿namespace RocketPlugin.Tests
 {
-    using NUnit.Framework;
-
     using BL;
+
+    using NUnit.Framework;
 
     using System;
 
