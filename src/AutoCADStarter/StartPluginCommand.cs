@@ -18,7 +18,7 @@ namespace AutoCADStarter
         [CommandMethod("StartRocketModelPlugin", CommandFlags.Modal)]
         public void StartCommand()
         {
-            Application.ShowModalDialog(new MainForm());
+            Application.ShowModelessDialog(new MainForm());
         }
     }
 

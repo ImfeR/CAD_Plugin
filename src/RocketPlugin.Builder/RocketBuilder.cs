@@ -31,6 +31,50 @@
         #region Methods
 
         /// <summary>
+        /// Уничтожает уже существующую модель ракеты, если такая есть.
+        /// </summary>
+        /// <param name="database">База данных текущего документа AutoCAD.</param>
+        /// <param name="blockName">Название блока.</param>
+        private void EraseExistingModel(Database database, string blockName)
+        {
+            ObjectId blockId = ObjectId.Null;
+
+            using (Transaction transaction = database.TransactionManager.StartTransaction())
+            {
+                BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId, OpenMode.ForRead);
+                if (blockTable.Has(blockName))
+                {
+                    blockId = blockTable[blockName];
+                }
+
+                if (blockId.IsNull)
+                {
+                    return;
+                }
+
+                BlockTableRecord blockTabelRecord = (BlockTableRecord)transaction.GetObject(blockId, OpenMode.ForRead);
+                var blkRefs = blockTabelRecord.GetBlockReferenceIds(true, true);
+                if (blkRefs != null && blkRefs.Count > 0)
+                {
+                    foreach (ObjectId blkRefId in blkRefs)
+                    {
+                        BlockReference blkRef = (BlockReference)transaction.GetObject(blkRefId, OpenMode.ForWrite);
+                        blkRef.Erase();
+                    }
+                }
+
+                blkRefs = blockTabelRecord.GetBlockReferenceIds(true, true);
+                if (blkRefs == null || blkRefs.Count == 0)
+                {
+                    blockTabelRecord.UpgradeOpen();
+                    blockTabelRecord.Erase();
+                }
+
+                transaction.Commit();
+            }
+        }
+
+        /// <summary>
         /// Строит модель ракеты.
         /// </summary>
         public void Build()
@@ -38,15 +82,29 @@
             var activeDocument = Application.DocumentManager.MdiActiveDocument;
             var database = activeDocument.Database;
 
+            var blockName = "Rocket";
+
             using (var documentLock = activeDocument.LockDocument())
             {
+                // Удаляем существующую модель ракеты, если такая есть.
+                EraseExistingModel(database, blockName);
+
                 using (var transaction = database.TransactionManager.StartTransaction())
                 {
-                    BlockTable blockTable = transaction.GetObject(database.BlockTableId,
-                        OpenMode.ForRead) as BlockTable;
-                    BlockTableRecord blockTableRecord = transaction.GetObject(blockTable[BlockTableRecord.ModelSpace],
-                        OpenMode.ForWrite) as BlockTableRecord;
+                    // Открываем таблицу блоков для записи.
+                    BlockTable blockTable = (BlockTable)transaction.GetObject(database.BlockTableId,
+                        OpenMode.ForWrite);
 
+                    // Создаем новое определение блока и даем ему имя.
+                    BlockTableRecord blockTableRecord = new BlockTableRecord();
+                    blockTableRecord.Name = blockName;
+
+                    // Добавляем созданное определение блока в таблицу блоков и в транзакцию,
+                    // запоминаем ID созданного определения блока.
+                    ObjectId blockTableRecordId = blockTable.Add(blockTableRecord);
+                    transaction.AddNewlyCreatedDBObject(blockTableRecord, true);
+
+                    // Задаем параметры.
                     double bodyLength = _parameters.BodyLength;
                     double bodyRadius = _parameters.BodyDiameter / 2;
                     int guidesCount = _parameters.GuidesCount;
@@ -60,19 +118,23 @@
                     double wingsLength = _parameters.WingsLength;
                     double wingsWidth = _parameters.WingsWidth;
 
+                    // Создание корпуса ракеты и смещение его на позицию 0, 0, 0.
                     var body = CreateBodyOrNose(bodyLength, bodyRadius, bodyRadius);
                     body.TransformBy(Matrix3d.Displacement(new Point3d(0, 0, bodyLength / 2) - Point3d.Origin));
 
+                    // Создание носа ракеты, смещение на 
+                    // необходиму позицию и объединение с корпусом.
                     var nose = CreateBodyOrNose(noseLength, bodyRadius, 0);
                     nose.TransformBy(Matrix3d.Displacement(new Point3d(0, 0, bodyLength + noseLength / 2) - Point3d.Origin));
-
                     body.BooleanOperation(BooleanOperationType.BoolUnite, nose);
 
+                    // Создание крыла ракуты.
                     var wing = CreateWedge(wingsWidth, wingsDepth, wingsLength);
-                    wing.TransformBy(Matrix3d.Displacement(new Point3d(_parameters.BodyDiameter / 2 + _parameters.WingsWidth / 2, 0, _parameters.WingsLength / 2) - Point3d.Origin));
+                    wing.TransformBy(Matrix3d.Displacement(new Point3d(bodyRadius + wingsWidth / 2, 0, wingsLength / 2) - Point3d.Origin));
 
                     body = ApplyPolarArrayOnBody(body, wingsCount, wing);
 
+                    // Создание направляющей ракеты.
                     var Guides = CreateGuides(guidesWidth, guidesDepth, guidesOuterRib, guidesInnerRib);
 
                     var guidesShiftDistanceZ = (guidesInnerRib / 2) + (bodyLength / 2);
@@ -81,8 +143,21 @@
 
                     body = ApplyPolarArrayOnBody(body, guidesCount, Guides);
 
+                    // Добавление модели ракеты в транзакцию
                     blockTableRecord.AppendEntity(body);
                     transaction.AddNewlyCreatedDBObject(body, true);
+
+                    // Открываем пространсто моделей для записи,
+                    // создаем новое вхождение блока, используя
+                    // ранее сохраненный ID определения блока
+                    BlockTableRecord modelSpace = (BlockTableRecord)transaction.GetObject(
+                        blockTable[BlockTableRecord.ModelSpace], OpenMode.ForWrite);
+                    BlockReference blockReference = new BlockReference(Point3d.Origin, blockTableRecordId);
+
+                    // Добавляем созданное вхождение блока
+                    // на пространство модели и в транзакцию
+                    modelSpace.AppendEntity(blockReference);
+                    transaction.AddNewlyCreatedDBObject(blockReference, true);
 
                     transaction.Commit();
                 }

@@ -247,8 +247,6 @@
 
             RocketBuilder builder = new RocketBuilder(_parameters);
             builder.Build();
-
-            Close();
         }
     }
 }
