@@ -15,11 +15,13 @@
     {
         #region Fields
 
+         //TODO: XML
         private RocketParameters _parameters;
 
         #endregion Fields
 
         #region Constructors
+
 
         public RocketBuilder(RocketParameters parameters)
         {
@@ -235,6 +237,7 @@
             var wedgeLength = (innerRibLength - outerRibLength) / 2;
             var wedgeShiftDistance = (outerRibLength + wedgeLength) / 2;
 
+            //TODO: Дубли
             var topPartGuides = CreateWedge(width, depth, wedgeLength);
             topPartGuides.TransformBy(Matrix3d.Displacement(new Point3d(0, 0, wedgeShiftDistance) - Point3d.Origin));
             guides.BooleanOperation(BooleanOperationType.BoolUnite, topPartGuides);

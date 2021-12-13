@@ -6,7 +6,8 @@
 
     using System;
     using System.Windows.Forms;
-                          
+
+     //TODO: XML
     public partial class MainForm : Form
     {
         private RocketParameters _parameters;
@@ -138,6 +139,7 @@
             }
         }
 
+        //TODO: Дубли
         private void OnChangeBodyLengthParameter()
         {
             CheckParameterValuesValidity();
@@ -166,6 +168,7 @@
             BuildButton.Enabled = true;
             errorProvider.Clear();
 
+            //TODO: Дубли
             try
             {
                 _parameters.BodyLength = double.Parse(BodyLengthTextBox.Text);

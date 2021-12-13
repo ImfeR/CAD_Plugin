@@ -33,7 +33,7 @@
         #endregion
 
         #region Fields
-
+         //TODO: XML
         private double _bodyDiameter;
         private double _bodyLength;
         private double _guidesInnerRibLength;
@@ -104,7 +104,9 @@
                 if (!Validator.ValidateValue(MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength, 
                     MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength, value))
                 {
-                    throw new ArgumentException("Введено неверное значение длины внутренней грани направляющей.");
+
+                    throw new ArgumentException("Введено неверное значение " +
+                                                "длины внутренней грани направляющей.");
                 }
 
                 _guidesInnerRibLength = value;
