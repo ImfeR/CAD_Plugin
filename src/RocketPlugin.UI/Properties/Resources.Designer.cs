@@ -59,15 +59,5 @@ namespace RocketPlugin.UI.Properties {
                 resourceCulture = value;
             }
         }
-        
-        /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap StatusInvalid_grey_16x {
-            get {
-                object obj = ResourceManager.GetObject("StatusInvalid_grey_16x", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
     }
 }

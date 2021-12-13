@@ -1,9 +1,9 @@
 ﻿using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
 
-[assembly: CommandClass(typeof(AutoCADStarter.StartPluginCommand))]
+[assembly: CommandClass(typeof(AutoCADConnector.StartPluginCommand))]
 
-namespace AutoCADStarter
+namespace AutoCADConnector
 {
     using RocketPlugin.UI;
 

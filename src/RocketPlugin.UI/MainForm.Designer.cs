@@ -90,24 +90,14 @@
             this.GuidingsInnerRibLengthTextBox = new System.Windows.Forms.TextBox();
             this.BuildButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.BodyDiameterErrorIcon = new System.Windows.Forms.PictureBox();
-            this.BodyLengthErrorIcon = new System.Windows.Forms.PictureBox();
-            this.NoseLengthErrorIcon = new System.Windows.Forms.PictureBox();
-            this.WingsLengthErrorIcon = new System.Windows.Forms.PictureBox();
-            this.WingsWidthErrorIcon = new System.Windows.Forms.PictureBox();
-            this.GuidingsInnderRibLengthErrorIcon = new System.Windows.Forms.PictureBox();
             this.GeneralParametersGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            ((System.ComponentModel.ISupportInitialize)(this.BodyDiameterErrorIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BodyLengthErrorIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NoseLengthErrorIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WingsLengthErrorIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WingsWidthErrorIcon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GuidingsInnderRibLengthErrorIcon)).BeginInit();
+            this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.GeneralParametersGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -304,7 +294,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(247, 97);
+            this.label4.Location = new System.Drawing.Point(259, 97);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(16, 15);
             this.label4.TabIndex = 8;
@@ -314,7 +304,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(247, 66);
+            this.label3.Location = new System.Drawing.Point(259, 66);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(16, 15);
             this.label3.TabIndex = 7;
@@ -324,7 +314,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(247, 35);
+            this.label2.Location = new System.Drawing.Point(259, 35);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(16, 15);
             this.label2.TabIndex = 6;
@@ -542,7 +532,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(247, 92);
+            this.label17.Location = new System.Drawing.Point(259, 92);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(16, 15);
             this.label17.TabIndex = 23;
@@ -561,7 +551,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(247, 63);
+            this.label16.Location = new System.Drawing.Point(259, 63);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(16, 15);
             this.label16.TabIndex = 21;
@@ -688,7 +678,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(247, 68);
+            this.label18.Location = new System.Drawing.Point(259, 69);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(16, 15);
             this.label18.TabIndex = 25;
@@ -729,79 +719,10 @@
             // 
             this.toolTip1.ShowAlways = true;
             // 
-            // BodyDiameterErrorIcon
-            // 
-            this.BodyDiameterErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
-            this.BodyDiameterErrorIcon.Location = new System.Drawing.Point(163, 67);
-            this.BodyDiameterErrorIcon.Name = "BodyDiameterErrorIcon";
-            this.BodyDiameterErrorIcon.Size = new System.Drawing.Size(16, 17);
-            this.BodyDiameterErrorIcon.TabIndex = 71;
-            this.BodyDiameterErrorIcon.TabStop = false;
-            this.toolTip1.SetToolTip(this.BodyDiameterErrorIcon, "Недопустимое значение параметра");
-            this.BodyDiameterErrorIcon.Visible = false;
-            // 
-            // BodyLengthErrorIcon
-            // 
-            this.BodyLengthErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
-            this.BodyLengthErrorIcon.Location = new System.Drawing.Point(163, 36);
-            this.BodyLengthErrorIcon.Name = "BodyLengthErrorIcon";
-            this.BodyLengthErrorIcon.Size = new System.Drawing.Size(16, 17);
-            this.BodyLengthErrorIcon.TabIndex = 70;
-            this.BodyLengthErrorIcon.TabStop = false;
-            this.toolTip1.SetToolTip(this.BodyLengthErrorIcon, "Недопустимое значение параметра");
-            this.BodyLengthErrorIcon.Visible = false;
-            // 
-            // NoseLengthErrorIcon
-            // 
-            this.NoseLengthErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
-            this.NoseLengthErrorIcon.Location = new System.Drawing.Point(163, 99);
-            this.NoseLengthErrorIcon.Name = "NoseLengthErrorIcon";
-            this.NoseLengthErrorIcon.Size = new System.Drawing.Size(16, 17);
-            this.NoseLengthErrorIcon.TabIndex = 72;
-            this.NoseLengthErrorIcon.TabStop = false;
-            this.toolTip1.SetToolTip(this.NoseLengthErrorIcon, "Недопустимое значение параметра");
-            this.NoseLengthErrorIcon.Visible = false;
-            // 
-            // WingsLengthErrorIcon
-            // 
-            this.WingsLengthErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
-            this.WingsLengthErrorIcon.Location = new System.Drawing.Point(163, 62);
-            this.WingsLengthErrorIcon.Name = "WingsLengthErrorIcon";
-            this.WingsLengthErrorIcon.Size = new System.Drawing.Size(16, 17);
-            this.WingsLengthErrorIcon.TabIndex = 73;
-            this.WingsLengthErrorIcon.TabStop = false;
-            this.toolTip1.SetToolTip(this.WingsLengthErrorIcon, "Недопустимое значение параметра");
-            this.WingsLengthErrorIcon.Visible = false;
-            // 
-            // WingsWidthErrorIcon
-            // 
-            this.WingsWidthErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
-            this.WingsWidthErrorIcon.Location = new System.Drawing.Point(163, 91);
-            this.WingsWidthErrorIcon.Name = "WingsWidthErrorIcon";
-            this.WingsWidthErrorIcon.Size = new System.Drawing.Size(16, 17);
-            this.WingsWidthErrorIcon.TabIndex = 74;
-            this.WingsWidthErrorIcon.TabStop = false;
-            this.toolTip1.SetToolTip(this.WingsWidthErrorIcon, "Недопустимое значение параметра");
-            this.WingsWidthErrorIcon.Visible = false;
-            // 
-            // GuidingsInnderRibLengthErrorIcon
-            // 
-            this.GuidingsInnderRibLengthErrorIcon.Image = global::RocketPlugin.UI.Properties.Resources.StatusInvalid_grey_16x;
-            this.GuidingsInnderRibLengthErrorIcon.Location = new System.Drawing.Point(163, 67);
-            this.GuidingsInnderRibLengthErrorIcon.Name = "GuidingsInnderRibLengthErrorIcon";
-            this.GuidingsInnderRibLengthErrorIcon.Size = new System.Drawing.Size(16, 17);
-            this.GuidingsInnderRibLengthErrorIcon.TabIndex = 75;
-            this.GuidingsInnderRibLengthErrorIcon.TabStop = false;
-            this.toolTip1.SetToolTip(this.GuidingsInnderRibLengthErrorIcon, "Недопустимое значение параметра");
-            this.GuidingsInnderRibLengthErrorIcon.Visible = false;
-            // 
             // GeneralParametersGroupBox
             // 
-            this.GeneralParametersGroupBox.Controls.Add(this.NoseLengthErrorIcon);
             this.GeneralParametersGroupBox.Controls.Add(this.BodyLenghtlabel);
-            this.GeneralParametersGroupBox.Controls.Add(this.BodyDiameterErrorIcon);
             this.GeneralParametersGroupBox.Controls.Add(this.label5);
-            this.GeneralParametersGroupBox.Controls.Add(this.BodyLengthErrorIcon);
             this.GeneralParametersGroupBox.Controls.Add(this.label4);
             this.GeneralParametersGroupBox.Controls.Add(this.NoseLengthlabel);
             this.GeneralParametersGroupBox.Controls.Add(this.NoseLengthTextBox);
@@ -837,8 +758,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.WingsWidthErrorIcon);
-            this.groupBox1.Controls.Add(this.WingsLengthErrorIcon);
             this.groupBox1.Controls.Add(this.WingsCountComboBox);
             this.groupBox1.Controls.Add(this.label13);
             this.groupBox1.Controls.Add(this.WingsLengthTextBox);
@@ -869,7 +788,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.GuidingsInnderRibLengthErrorIcon);
             this.groupBox2.Controls.Add(this.GuidingsCountComboBox);
             this.groupBox2.Controls.Add(this.label38);
             this.groupBox2.Controls.Add(this.label15);
@@ -889,6 +807,12 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры направляющих";
             // 
+            // errorProvider
+            // 
+            this.errorProvider.BlinkRate = 0;
+            this.errorProvider.BlinkStyle = System.Windows.Forms.ErrorBlinkStyle.NeverBlink;
+            this.errorProvider.ContainerControl = this;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -905,18 +829,13 @@
             this.MinimumSize = new System.Drawing.Size(515, 479);
             this.Name = "MainForm";
             this.Text = "Создание модели ракеты";
-            ((System.ComponentModel.ISupportInitialize)(this.BodyDiameterErrorIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BodyLengthErrorIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NoseLengthErrorIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WingsLengthErrorIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.WingsWidthErrorIcon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.GuidingsInnderRibLengthErrorIcon)).EndInit();
             this.GeneralParametersGroupBox.ResumeLayout(false);
             this.GeneralParametersGroupBox.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -984,16 +903,11 @@
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.PictureBox BodyLengthErrorIcon;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.PictureBox BodyDiameterErrorIcon;
         private System.Windows.Forms.GroupBox GeneralParametersGroupBox;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.PictureBox NoseLengthErrorIcon;
-        private System.Windows.Forms.PictureBox WingsWidthErrorIcon;
-        private System.Windows.Forms.PictureBox WingsLengthErrorIcon;
-        private System.Windows.Forms.PictureBox GuidingsInnderRibLengthErrorIcon;
+        private System.Windows.Forms.ErrorProvider errorProvider;
     }
 }
 

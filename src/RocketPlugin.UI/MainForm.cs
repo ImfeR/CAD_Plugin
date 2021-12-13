@@ -39,42 +39,28 @@
 
         private void BodyLengthTextBox_Leave(object sender, EventArgs e)
         {
-            if(!double.TryParse(BodyLengthTextBox.Text, out var value))
-            {
-                BodyLengthErrorIcon.Visible = true;
-                return;
-            }
-
-            try
-            {
-                _parameters.BodyLength = value;
-                BodyLengthErrorIcon.Visible = false;
-            }
-            catch
-            {
-                BodyLengthErrorIcon.Visible = true;
-            }
+            //try
+            //{
+            //    _parameters.BodyLength = double.Parse(BodyLengthTextBox.Text);
+            //}
+            //catch (Exception exeption)
+            //{
+            //    errorProvider.SetError(BodyLengthTextBox, exeption.Message);
+            //}
 
             OnChangeBodyLengthParameter();
         }
 
         private void BodyDiameterTextBox_Leave(object sender, EventArgs e)
         {
-            if(!double.TryParse(BodyDiameterTextBox.Text, out var value))
-            {
-                BodyDiameterErrorIcon.Visible = true;
-                return;
-            }
-
-            try
-            {
-                _parameters.BodyDiameter = value;
-                BodyDiameterErrorIcon.Visible = false;
-            }
-            catch
-            {
-                BodyDiameterErrorIcon.Visible = true;
-            }
+            //try
+            //{
+            //    _parameters.BodyDiameter = double.Parse(BodyDiameterTextBox.Text);
+            //}
+            //catch (Exception exeption)
+            //{
+            //    errorProvider.SetError(BodyDiameterTextBox, exeption.Message);
+            //}
 
             OnChangeBodyWidthParameter();
         }
@@ -154,14 +140,22 @@
 
         private void OnChangeBodyLengthParameter()
         {
-            ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
             CheckParameterValuesValidity();
+
+            if(errorProvider.GetError(BodyLengthTextBox) == string.Empty)
+            {
+                ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
+            }
         }
 
         private void OnChangeBodyWidthParameter()
         {
-            ChangeMinMaxLabels(nameof(RocketParameters.BodyDiameter));
             CheckParameterValuesValidity();
+
+            if (errorProvider.GetError(BodyDiameterTextBox) == string.Empty)
+            {
+                ChangeMinMaxLabels(nameof(RocketParameters.BodyDiameter));
+            }
         }
 
         /// <summary>
@@ -170,70 +164,65 @@
         private void CheckParameterValuesValidity()
         {
             BuildButton.Enabled = true;
+            errorProvider.Clear();
 
             try
             {
                 _parameters.BodyLength = double.Parse(BodyLengthTextBox.Text);
-                BodyLengthErrorIcon.Visible = false;
             }
-            catch 
+            catch (Exception e)
             {
-                BodyLengthErrorIcon.Visible = true;
+                errorProvider.SetError(BodyLengthTextBox, e.Message);
                 BuildButton.Enabled = false;
             }
 
             try
             {
                 _parameters.BodyDiameter = double.Parse(BodyDiameterTextBox.Text);
-                BodyDiameterErrorIcon.Visible = false;
             }
-            catch
+            catch (Exception e)
             {
-                BodyDiameterErrorIcon.Visible = true;
+                errorProvider.SetError(BodyDiameterTextBox, e.Message);
                 BuildButton.Enabled = false;
             }
 
             try
             {
                 _parameters.NoseLength = double.Parse(NoseLengthTextBox.Text);
-                NoseLengthErrorIcon.Visible = false;
             }
-            catch
+            catch (Exception e)
             {
-                NoseLengthErrorIcon.Visible = true;
+                errorProvider.SetError(NoseLengthTextBox, e.Message);
                 BuildButton.Enabled = false;
             }
 
             try
             {
                 _parameters.WingsLength = double.Parse(WingsLengthTextBox.Text);
-                WingsLengthErrorIcon.Visible = false;
             }
-            catch
+            catch (Exception e)
             {
-                WingsLengthErrorIcon.Visible = true;
+                errorProvider.SetError(WingsLengthTextBox, e.Message);
                 BuildButton.Enabled = false;
             }
 
             try
             {
                 _parameters.WingsWidth = double.Parse(WingsWidthTextBox.Text);
-                WingsWidthErrorIcon.Visible = false;
             }
-            catch
+            catch (Exception e)
             {
-                WingsWidthErrorIcon.Visible = true;
+                errorProvider.SetError(WingsWidthTextBox, e.Message);
                 BuildButton.Enabled = false;
             }
 
             try
             {
                 _parameters.GuidesInnerRibLength = double.Parse(GuidingsInnerRibLengthTextBox.Text);
-                GuidingsInnderRibLengthErrorIcon.Visible = false;
             }
-            catch
+            catch (Exception e)
             {
-                GuidingsInnderRibLengthErrorIcon.Visible = true;
+                errorProvider.SetError(GuidingsInnerRibLengthTextBox, e.Message);
                 BuildButton.Enabled = false;
             }
         }

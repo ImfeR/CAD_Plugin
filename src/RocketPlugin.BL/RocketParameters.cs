@@ -35,15 +35,10 @@
         #region Fields
 
         private double _bodyDiameter;
-
         private double _bodyLength;
-
         private double _guidesInnerRibLength;
-
         private double _noseLength;
-
         private double _wingsLength;
-
         private double _wingsWidth;
 
         #endregion

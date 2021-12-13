@@ -57,10 +57,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoCADConnector\AutoCADConnector.csproj">
-      <Project>{b0bbec3d-beb1-4ecd-8686-98164adad3e2}</Project>
-      <Name>AutoCADConnector</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RocketPlugin.BL\RocketPlugin.BL.csproj">
       <Project>{08ca8ab3-1b8d-48c1-8589-7aa7a7f0cdb2}</Project>
       <Name>RocketPlugin.BL</Name>
