@@ -33,7 +33,7 @@
         #endregion
 
         #region Fields
-         //TODO: XML
+        //TODO: XML
 
         /// <summary>
         /// Диаметр корпуса.
@@ -72,15 +72,15 @@
         /// <summary>
         /// Димаетр корпуса ракеты.
         /// </summary>
-        public double BodyDiameter 
-        { 
+        public double BodyDiameter
+        {
             get => _bodyDiameter;
             set
-            {   
-                if(!Validator.ValidateValue(MIN_BODY_DIAMTER_MULTIPLIER * BodyLength, 
+            {
+                if (!Validator.ValidateValue(MIN_BODY_DIAMTER_MULTIPLIER * BodyLength,
                     MAX_BODY_DIAMTER_MULTIPLIER * BodyLength, value))
                 {
-                    throw new ArgumentException("Введено неверное " 
+                    throw new ArgumentException("Введено неверное "
                         + "значение диаметра корпуса.");
                 }
 
@@ -94,12 +94,12 @@
         /// <summary>
         /// Высота корпуса ракеты.
         /// </summary>
-        public double BodyLength 
+        public double BodyLength
         {
             get => _bodyLength;
             set
             {
-                if(!Validator.ValidateValue(
+                if (!Validator.ValidateValue(
                     MIN_BODY_LENGTH, MAX_BODY_LENGTH, value))
                 {
                     throw new ArgumentException("Введено неверное значение"
@@ -129,7 +129,7 @@
             set
             {
                 if (!Validator.ValidateValue(
-                    MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength, 
+                    MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength,
                     MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength, value))
                 {
 
@@ -146,6 +146,11 @@
         /// Длина внешней грани направляющей.
         /// </summary>
         public double GuidesOuterRibLength { get; set; }
+
+        /// <summary>
+        /// Тип направляющей.
+        /// </summary>
+        public GuidesType GuidesType { get; set; }
 
         /// <summary>
         /// Ширина направляющих.
@@ -240,6 +245,7 @@
             WingsDepth = 0.25;
             WingsLength = 4;
             WingsWidth = 0.625;
+            GuidesType = GuidesType.Trapezoid;
         }
 
         #endregion

@@ -93,6 +93,8 @@
             this.GeneralParametersGroupBox = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.GuidesTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
             this.GeneralParametersGroupBox.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -590,7 +592,7 @@
             // 
             this.MaxGuidesInnerRibLength.AutoSize = true;
             this.MaxGuidesInnerRibLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MaxGuidesInnerRibLength.Location = new System.Drawing.Point(412, 68);
+            this.MaxGuidesInnerRibLength.Location = new System.Drawing.Point(412, 97);
             this.MaxGuidesInnerRibLength.Name = "MaxGuidesInnerRibLength";
             this.MaxGuidesInnerRibLength.Size = new System.Drawing.Size(24, 15);
             this.MaxGuidesInnerRibLength.TabIndex = 66;
@@ -600,7 +602,7 @@
             // 
             this.MinGuidesInnerRibLength.AutoSize = true;
             this.MinGuidesInnerRibLength.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MinGuidesInnerRibLength.Location = new System.Drawing.Point(317, 68);
+            this.MinGuidesInnerRibLength.Location = new System.Drawing.Point(317, 97);
             this.MinGuidesInnerRibLength.Name = "MinGuidesInnerRibLength";
             this.MinGuidesInnerRibLength.Size = new System.Drawing.Size(14, 15);
             this.MinGuidesInnerRibLength.TabIndex = 65;
@@ -610,7 +612,7 @@
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label28.Location = new System.Drawing.Point(354, 68);
+            this.label28.Location = new System.Drawing.Point(354, 97);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(16, 15);
             this.label28.TabIndex = 46;
@@ -620,7 +622,7 @@
             // 
             this.label27.AutoSize = true;
             this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label27.Location = new System.Drawing.Point(450, 68);
+            this.label27.Location = new System.Drawing.Point(450, 97);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(16, 15);
             this.label27.TabIndex = 45;
@@ -630,7 +632,7 @@
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label22.Location = new System.Drawing.Point(385, 68);
+            this.label22.Location = new System.Drawing.Point(385, 97);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(21, 15);
             this.label22.TabIndex = 43;
@@ -640,7 +642,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(290, 68);
+            this.label10.Location = new System.Drawing.Point(290, 97);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(21, 15);
             this.label10.TabIndex = 42;
@@ -658,7 +660,7 @@
             "4",
             "5",
             "6"});
-            this.GuidingsCountComboBox.Location = new System.Drawing.Point(184, 35);
+            this.GuidingsCountComboBox.Location = new System.Drawing.Point(184, 64);
             this.GuidingsCountComboBox.Name = "GuidingsCountComboBox";
             this.GuidingsCountComboBox.Size = new System.Drawing.Size(56, 23);
             this.GuidingsCountComboBox.TabIndex = 41;
@@ -668,7 +670,7 @@
             // 
             this.label38.AutoSize = true;
             this.label38.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label38.Location = new System.Drawing.Point(6, 38);
+            this.label38.Location = new System.Drawing.Point(6, 67);
             this.label38.Name = "label38";
             this.label38.Size = new System.Drawing.Size(79, 15);
             this.label38.TabIndex = 40;
@@ -678,7 +680,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(259, 69);
+            this.label18.Location = new System.Drawing.Point(259, 98);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(16, 15);
             this.label18.TabIndex = 25;
@@ -688,7 +690,7 @@
             // 
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(6, 68);
+            this.label15.Location = new System.Drawing.Point(6, 97);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(151, 15);
             this.label15.TabIndex = 4;
@@ -697,7 +699,7 @@
             // GuidingsInnerRibLengthTextBox
             // 
             this.GuidingsInnerRibLengthTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GuidingsInnerRibLengthTextBox.Location = new System.Drawing.Point(184, 66);
+            this.GuidingsInnerRibLengthTextBox.Location = new System.Drawing.Point(184, 95);
             this.GuidingsInnerRibLengthTextBox.Name = "GuidingsInnerRibLengthTextBox";
             this.GuidingsInnerRibLengthTextBox.Size = new System.Drawing.Size(56, 21);
             this.GuidingsInnerRibLengthTextBox.TabIndex = 24;
@@ -707,7 +709,7 @@
             // 
             this.BuildButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.BuildButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BuildButton.Location = new System.Drawing.Point(12, 401);
+            this.BuildButton.Location = new System.Drawing.Point(12, 441);
             this.BuildButton.Name = "BuildButton";
             this.BuildButton.Size = new System.Drawing.Size(189, 31);
             this.BuildButton.TabIndex = 4;
@@ -788,6 +790,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.GuidesTypeComboBox);
+            this.groupBox2.Controls.Add(this.label11);
             this.groupBox2.Controls.Add(this.GuidingsCountComboBox);
             this.groupBox2.Controls.Add(this.label38);
             this.groupBox2.Controls.Add(this.label15);
@@ -802,10 +806,31 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.groupBox2.Location = new System.Drawing.Point(12, 298);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(479, 97);
+            this.groupBox2.Size = new System.Drawing.Size(479, 137);
             this.groupBox2.TabIndex = 74;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Параметры направляющих";
+            // 
+            // GuidesTypeComboBox
+            // 
+            this.GuidesTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GuidesTypeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GuidesTypeComboBox.FormattingEnabled = true;
+            this.GuidesTypeComboBox.Location = new System.Drawing.Point(184, 32);
+            this.GuidesTypeComboBox.Name = "GuidesTypeComboBox";
+            this.GuidesTypeComboBox.Size = new System.Drawing.Size(127, 23);
+            this.GuidesTypeComboBox.TabIndex = 68;
+            this.GuidesTypeComboBox.SelectedValueChanged += new System.EventHandler(this.OnGuidesTypeComboBoxSelectedValueChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(6, 37);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(28, 15);
+            this.label11.TabIndex = 67;
+            this.label11.Text = "Тип";
             // 
             // errorProvider
             // 
@@ -818,15 +843,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.ClientSize = new System.Drawing.Size(499, 440);
+            this.ClientSize = new System.Drawing.Size(499, 484);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.GeneralParametersGroupBox);
             this.Controls.Add(this.BuildButton);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MaximumSize = new System.Drawing.Size(515, 479);
-            this.MinimumSize = new System.Drawing.Size(515, 479);
+            this.MaximumSize = new System.Drawing.Size(515, 523);
+            this.MinimumSize = new System.Drawing.Size(515, 523);
             this.Name = "MainForm";
             this.Text = "Создание модели ракеты";
             this.GeneralParametersGroupBox.ResumeLayout(false);
@@ -908,6 +933,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.ComboBox GuidesTypeComboBox;
+        private System.Windows.Forms.Label label11;
     }
 }
 
