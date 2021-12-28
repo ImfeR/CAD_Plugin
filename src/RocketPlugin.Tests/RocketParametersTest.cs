@@ -4,156 +4,126 @@
 
     using NUnit.Framework;
 
-    using System;
+    using System.Reflection;
 
     [TestFixture]
     public class RocketParametersTest
     {
-        [TestCase(10, TestName = "Проверка Get и Set для BodyLength при значении равному граничному минимальному")]
-        [TestCase(15, TestName = "Проверка Get и Set для BodyLength при значении равному определенному выражению в границе допустимых значений")]
-        [TestCase(25, TestName = "Проверка Get и Set для BodyLength при значении равному граничному максимальному")]
-        public void BodyLength_GetSetValue_Success(double expectedValue)
+        [TestCase(10, nameof(RocketParameters.BodyLength), 
+            TestName = "Проверка Get и Set для BodyLength при" + 
+            " значении равному граничному минимальному")]
+        [TestCase(15, nameof(RocketParameters.BodyLength), 
+            TestName = "Проверка Get и Set для BodyLength при" + 
+            "значении равному определенному выражению в границе допустимых значений")]
+        [TestCase(25, nameof(RocketParameters.BodyLength), 
+            TestName = "Проверка Get и Set для BodyLength при" + 
+            " значении равному граничному максимальному")]
+        [TestCase(2, nameof(RocketParameters.BodyDiameter), 
+            TestName = "Проверка Get и Set для BodyDiameter при" + 
+            " значении равному граничному минимальному")]
+        [TestCase(2.5, nameof(RocketParameters.BodyDiameter), 
+            TestName = "Проверка Get и Set для BodyDiameter при значении " + 
+            "равному определенному выражению в границе допустимых значений")]
+        [TestCase(3, nameof(RocketParameters.BodyDiameter), 
+            TestName = "Проверка Get и Set для BodyDiameter при значении " + 
+            "равному граничному максимальному")]
+        [TestCase(4, nameof(RocketParameters.GuidesInnerRibLength), 
+            TestName = "Проверка Get и Set для GuidesInnerRibLength при " + 
+            "значении равному граничному минимальному")]
+        [TestCase(5, nameof(RocketParameters.GuidesInnerRibLength), 
+            TestName = "Проверка Get и Set для GuidesInnerRibLength при " + 
+            "значении равному определенному выражению в границе допустимых значений")]
+        [TestCase(6, nameof(RocketParameters.GuidesInnerRibLength), 
+            TestName = "Проверка Get и Set для GuidesInnerRibLength при " + 
+            "значении равному граничному максимальному")]
+        [TestCase(4, nameof(RocketParameters.NoseLength), 
+            TestName = "Проверка Get и Set для NoseLength при значении " + 
+            "равному граничному минимальному")]
+        [TestCase(6, nameof(RocketParameters.NoseLength), 
+            TestName = "Проверка Get и Set для NoseLength при значении " + 
+            "равному определенному выражению в границе допустимых значений")]
+        [TestCase(8, nameof(RocketParameters.NoseLength), 
+            TestName = "Проверка Get и Set для NoseLength при значении " + 
+            "равному граничному максимальному")]
+        [TestCase(3, nameof(RocketParameters.WingsLength), 
+            TestName = "Проверка Get и Set для WingsLength при значении " + 
+            "равному граничному минимальному")]
+        [TestCase(5, nameof(RocketParameters.WingsLength), 
+            TestName = "Проверка Get и Set для WingsLength при значении " + 
+            "равному определенному выражению в границе допустимых значений")]
+        [TestCase(7, nameof(RocketParameters.WingsLength), 
+            TestName = "Проверка Get и Set для WingsLength при значении " + 
+            "равному граничному максимальному")]
+        [TestCase(0.5, nameof(RocketParameters.WingsWidth),
+            TestName = "Проверка Get и Set для WingsWidth при значении " + 
+            "равному граничному минимальному")]
+        [TestCase(0.7, nameof(RocketParameters.WingsWidth), 
+            TestName = "Проверка Get и Set для WingsWidth при значении " + 
+            "равному определенному выражению в границе допустимых значений")]
+        [TestCase(1, nameof(RocketParameters.WingsWidth), 
+            TestName = "Проверка Get и Set для WingsWidth при значении " + 
+            "равному граничному максимальному")]
+        public void AnyParameter_GetSetValue_Success(double expectedValue, string parameterName)
         {
             RocketParameters rocketParameter = new RocketParameters();
 
-            rocketParameter.BodyLength = expectedValue;
+            var propertyInfo = typeof(RocketParameters).
+                GetProperty(parameterName);
+            propertyInfo.SetValue(rocketParameter, expectedValue);
 
-            Assert.AreEqual(expectedValue, rocketParameter.BodyLength);
+            Assert.AreEqual(expectedValue, propertyInfo.GetValue(rocketParameter));
         }
 
-        [TestCase(9.9, TestName = "Проверка Set для BodyLength при присвоении значения равному меньше минимального возможного")]
-        [TestCase(25.1, TestName = "Проверка Set для BodyLength при присвоении значения равному больше максимального возможного")]
-        public void BodyLength_SetValue_Failed(double value)
+        [TestCase(9.9, nameof(RocketParameters.BodyLength), 
+            TestName = "Проверка Set для BodyLength при присвоении " + 
+            "значения равному меньше минимального возможного")]
+        [TestCase(25.1, nameof(RocketParameters.BodyLength), 
+            TestName = "Проверка Set для BodyLength при присвоении " + 
+            "значения равному больше максимального возможного")]
+        [TestCase(1.9, nameof(RocketParameters.BodyDiameter), 
+            TestName = "Проверка Set для BodyDiameter при присвоении " + 
+            "значения равному меньше минимального возможного")]
+        [TestCase(3.1, nameof(RocketParameters.BodyDiameter), 
+            TestName = "Проверка Set для BodyDiameter при присвоении " + 
+            "значения равному больше максимального возможного")]
+        [TestCase(3.9, nameof(RocketParameters.GuidesInnerRibLength), 
+            TestName = "Проверка Set для GuidesInnerRibLength при присвоении " + 
+            "значения равному меньше минимального возможного")]
+        [TestCase(6.1, nameof(RocketParameters.GuidesInnerRibLength), 
+            TestName = "Проверка Set для GuidesInnerRibLength при присвоении " + 
+            "значения равному больше максимального возможного")]
+        [TestCase(3.9, nameof(RocketParameters.NoseLength), 
+            TestName = "Проверка Set для NoseLength при присвоении значения " + 
+            "равному меньше минимального возможного")]
+        [TestCase(8.1, nameof(RocketParameters.NoseLength), 
+            TestName = "Проверка Set для NoseLength при присвоении значения " + 
+            "равному больше максимального возможного")]
+        [TestCase(2.9, nameof(RocketParameters.WingsLength), 
+            TestName = "Проверка Set для WingsLength при присвоении значения " + 
+            "равному меньше минимального возможного")]
+        [TestCase(7.1, nameof(RocketParameters.WingsLength), 
+            TestName = "Проверка Set для WingsLength при присвоении значения " + 
+            "равному больше максимального возможного")]
+        [TestCase(0.3, nameof(RocketParameters.WingsWidth), 
+            TestName = "Проверка Set для WingsWidth при присвоении значения " + 
+            "равному меньше минимального возможного")]
+        [TestCase(1.1, nameof(RocketParameters.WingsWidth), 
+            TestName = "Проверка Set для WingsWidth при присвоении значения " + 
+            "равному больше максимального возможного")]
+        public void AnyParameter_SetValue_Failed(double value, string parameterName)
         {
             RocketParameters rocketParameter = new RocketParameters();
+            var propertyInfo = typeof(RocketParameters).
+                GetProperty(parameterName);
 
-            Assert.Throws<ArgumentException>(() => 
+            Assert.Throws<TargetInvocationException>(() =>
             {
-                rocketParameter.BodyLength = value;
+                propertyInfo.SetValue(rocketParameter, value);
             });
         }
 
-        [TestCase(2, TestName = "Проверка Get и Set для BodyDiameter при значении равному граничному минимальному")]
-        [TestCase(2.5, TestName = "Проверка Get и Set для BodyDiameter при значении равному определенному выражению в границе допустимых значений")]
-        [TestCase(3, TestName = "Проверка Get и Set для BodyDiameter при значении равному граничному максимальному")]
-        public void BodyDiameter_GetSetValue_Success(double expectedValue)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            rocketParameter.BodyDiameter = expectedValue;
-
-            Assert.AreEqual(expectedValue, rocketParameter.BodyDiameter);
-        }
-
-        [TestCase(1.9, TestName = "Проверка Set для BodyDiameter при присвоении значения равному меньше минимального возможного")]
-        [TestCase(3.1, TestName = "Проверка Set для BodyDiameter при присвоении значения равному больше максимального возможного")]
-        public void BodyDiameter_SetValue_Failed(double value)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            Assert.Throws<ArgumentException>(() =>
-            {
-                rocketParameter.BodyDiameter = value;
-            });
-        }
-
-        [TestCase(4, TestName = "Проверка Get и Set для GuidesInnerRibLength при значении равному граничному минимальному")]
-        [TestCase(5, TestName = "Проверка Get и Set для GuidesInnerRibLength при значении равному определенному выражению в границе допустимых значений")]
-        [TestCase(6, TestName = "Проверка Get и Set для GuidesInnerRibLength при значении равному граничному максимальному")]
-        public void GuidesInnerRibLength_GetSetValue_Success(double expectedValue)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            rocketParameter.GuidesInnerRibLength = expectedValue;
-
-            Assert.AreEqual(expectedValue, rocketParameter.GuidesInnerRibLength);
-        }
-
-        [TestCase(3.9, TestName = "Проверка Set для GuidesInnerRibLength при присвоении значения равному меньше минимального возможного")]
-        [TestCase(6.1, TestName = "Проверка Set для GuidesInnerRibLength при присвоении значения равному больше максимального возможного")]
-        public void GuidesInnerRibLength_SetValue_Failed(double value)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            Assert.Throws<ArgumentException>(() =>
-            {
-                rocketParameter.GuidesInnerRibLength = value;
-            });
-        }
-
-        [TestCase(4, TestName = "Проверка Get и Set для NoseLength при значении равному граничному минимальному")]
-        [TestCase(6, TestName = "Проверка Get и Set для NoseLength при значении равному определенному выражению в границе допустимых значений")]
-        [TestCase(8, TestName = "Проверка Get и Set для NoseLength при значении равному граничному максимальному")]
-        public void NoseLength_GetSetValue_Success(double expectedValue)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            rocketParameter.NoseLength = expectedValue;
-
-            Assert.AreEqual(expectedValue, rocketParameter.NoseLength);
-        }
-
-        [TestCase(3.9, TestName = "Проверка Set для NoseLength при присвоении значения равному меньше минимального возможного")]
-        [TestCase(8.1, TestName = "Проверка Set для NoseLength при присвоении значения равному больше максимального возможного")]
-        public void NoseLength_SetValue_Failed(double value)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            Assert.Throws<ArgumentException>(() =>
-            {
-                rocketParameter.NoseLength = value;
-            });
-        }
-
-        [TestCase(3, TestName = "Проверка Get и Set для WingsLength при значении равному граничному минимальному")]
-        [TestCase(5, TestName = "Проверка Get и Set для WingsLength при значении равному определенному выражению в границе допустимых значений")]
-        [TestCase(7, TestName = "Проверка Get и Set для WingsLength при значении равному граничному максимальному")]
-        public void WingsLength_GetSetValue_Success(double expectedValue)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            rocketParameter.WingsLength = expectedValue;
-
-            Assert.AreEqual(expectedValue, rocketParameter.WingsLength);
-        }
-
-        [TestCase(2.9, TestName = "Проверка Set для WingsLength при присвоении значения равному меньше минимального возможного")]
-        [TestCase(7.1, TestName = "Проверка Set для WingsLength при присвоении значения равному больше максимального возможного")]
-        public void WingsLength_SetValue_Failed(double value)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            Assert.Throws<ArgumentException>(() =>
-            {
-                rocketParameter.WingsLength = value;
-            });
-        }
-
-        [TestCase(0.5, TestName = "Проверка Get и Set для WingsWidth при значении равному граничному минимальному")]
-        [TestCase(0.7, TestName = "Проверка Get и Set для WingsWidth при значении равному определенному выражению в границе допустимых значений")]
-        [TestCase(1, TestName = "Проверка Get и Set для WingsWidth при значении равному граничному максимальному")]
-        public void WingsWidth_GetSetValue_Success(double expectedValue)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            rocketParameter.WingsWidth = expectedValue;
-
-            Assert.AreEqual(expectedValue, rocketParameter.WingsWidth);
-        }
-
-        [TestCase(0.3, TestName = "Проверка Set для WingsWidth при присвоении значения равному меньше минимального возможного")]
-        [TestCase(1.1, TestName = "Проверка Set для WingsWidth при присвоении значения равному больше максимального возможного")]
-        public void WingsWidth_SetValue_Failed(double value)
-        {
-            RocketParameters rocketParameter = new RocketParameters();
-
-            Assert.Throws<ArgumentException>(() =>
-            {
-                rocketParameter.WingsWidth = value;
-            });
-        }
-
-        [TestCase(TestName = "Проверка корректности создания объекта используя конструткор по умолчанию")]
+        [TestCase(TestName = "Проверка корректности создания объекта " +
+            "используя конструткор по умолчанию")]
         public void Constructor_CorrectCreation_Success()
         {
             var expectedBodyLength = 20;

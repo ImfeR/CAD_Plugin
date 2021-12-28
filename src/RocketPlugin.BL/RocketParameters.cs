@@ -9,36 +9,60 @@
     {
         #region Constants
 
-        public double MAX_BODY_DIAMTER_MULTIPLIER = 0.15;
-        public double MIN_BODY_DIAMTER_MULTIPLIER = 0.1;
+        public const double MAX_BODY_DIAMTER_MULTIPLIER = 0.15;
+        public const double MIN_BODY_DIAMTER_MULTIPLIER = 0.1;
 
-        public double MAX_BODY_LENGTH = 25;
-        public double MIN_BODY_LENGTH = 10;
+        public const double MAX_BODY_LENGTH = 25;
+        public const double MIN_BODY_LENGTH = 10;
 
-        public double MAX_NOSE_LENGTH_MULTIPLIER = 0.4;
-        public double MIN_NOSE_LENGTH_MULTIPLIER = 0.2;
+        public const double MAX_NOSE_LENGTH_MULTIPLIER = 0.4;
+        public const double MIN_NOSE_LENGTH_MULTIPLIER = 0.2;
 
-        public double MAX_WING_WIDTH_MULTIPLIER = 0.4;
-        public double MIN_WING_WIDTH_MULTIPLIER = 0.2;
+        public const double MAX_WING_WIDTH_MULTIPLIER = 0.4;
+        public const double MIN_WING_WIDTH_MULTIPLIER = 0.2;
 
-        public double MAX_WING_LENGTH_MULTIPLIER = 0.35;
-        public double MIN_WING_LENGTH_MULTIPLIER = 0.15;
+        public const double MAX_WING_LENGTH_MULTIPLIER = 0.35;
+        public const double MIN_WING_LENGTH_MULTIPLIER = 0.15;
 
-        public double MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER = 0.3;
-        public double MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER = 0.2;
+        public const double MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER = 0.3;
+        public const double MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER = 0.2;
 
-        public double GUIDES_OUTER_RIB_LENGTH_MULTIPLIER = 0.5;
-        public double GUIDES_WIDTH_MULTIPLIER = 0.2;
+        public const double GUIDES_OUTER_RIB_LENGTH_MULTIPLIER = 0.5;
+        public const double GUIDES_WIDTH_MULTIPLIER = 0.2;
 
         #endregion
 
         #region Fields
          //TODO: XML
+
+        /// <summary>
+        /// Диаметр корпуса.
+        /// </summary>
         private double _bodyDiameter;
+
+        /// <summary>
+        /// Длина корпуса
+        /// </summary>
         private double _bodyLength;
+
+        /// <summary>
+        /// Длина внутренней грани направляющей.
+        /// </summary>
         private double _guidesInnerRibLength;
+
+        /// <summary>
+        /// Длина носа.
+        /// </summary>
         private double _noseLength;
+
+        /// <summary>
+        /// Длина крыла.
+        /// </summary>
         private double _wingsLength;
+
+        /// <summary>
+        /// Ширина крыла.
+        /// </summary>
         private double _wingsWidth;
 
         #endregion
@@ -56,7 +80,8 @@
                 if(!Validator.ValidateValue(MIN_BODY_DIAMTER_MULTIPLIER * BodyLength, 
                     MAX_BODY_DIAMTER_MULTIPLIER * BodyLength, value))
                 {
-                    throw new ArgumentException("Введено неверное значение диаметра корпуса.");
+                    throw new ArgumentException("Введено неверное " 
+                        + "значение диаметра корпуса.");
                 }
 
                 _bodyDiameter = value;
@@ -74,9 +99,11 @@
             get => _bodyLength;
             set
             {
-                if(!Validator.ValidateValue(MIN_BODY_LENGTH, MAX_BODY_LENGTH, value))
+                if(!Validator.ValidateValue(
+                    MIN_BODY_LENGTH, MAX_BODY_LENGTH, value))
                 {
-                    throw new ArgumentException("Введено неверное значение длины корпуса.");
+                    throw new ArgumentException("Введено неверное значение"
+                        + " длины корпуса.");
                 }
 
                 _bodyLength = value;
@@ -101,7 +128,8 @@
             get => _guidesInnerRibLength;
             set
             {
-                if (!Validator.ValidateValue(MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength, 
+                if (!Validator.ValidateValue(
+                    MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength, 
                     MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER * BodyLength, value))
                 {
 
@@ -132,7 +160,8 @@
             get => _noseLength;
             set
             {
-                if (!Validator.ValidateValue( MIN_NOSE_LENGTH_MULTIPLIER * BodyLength, 
+                if (!Validator.ValidateValue( 
+                    MIN_NOSE_LENGTH_MULTIPLIER * BodyLength, 
                     MAX_NOSE_LENGTH_MULTIPLIER * BodyLength, value))
                 {
                     throw new ArgumentException("Введено неверное значение длины носа.");
@@ -160,7 +189,8 @@
             get => _wingsLength;
             set
             {
-                if (!Validator.ValidateValue( MIN_WING_LENGTH_MULTIPLIER * BodyLength, 
+                if (!Validator.ValidateValue( 
+                    MIN_WING_LENGTH_MULTIPLIER * BodyLength, 
                     MAX_WING_LENGTH_MULTIPLIER * BodyLength, value))
                 {
                     throw new ArgumentException("Введено неверная длина крыльев.");
@@ -178,7 +208,8 @@
             get => _wingsWidth;
             set
             {
-                if (!Validator.ValidateValue(MIN_WING_WIDTH_MULTIPLIER * BodyDiameter,
+                if (!Validator.ValidateValue(
+                    MIN_WING_WIDTH_MULTIPLIER * BodyDiameter,
                     MAX_WING_WIDTH_MULTIPLIER * BodyDiameter, value))
                 {
                     throw new ArgumentException("Введено неверная ширина крыльев.");

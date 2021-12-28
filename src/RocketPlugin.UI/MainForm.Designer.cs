@@ -328,7 +328,7 @@
             this.NoseLengthTextBox.Name = "NoseLengthTextBox";
             this.NoseLengthTextBox.Size = new System.Drawing.Size(56, 21);
             this.NoseLengthTextBox.TabIndex = 5;
-            this.NoseLengthTextBox.Leave += new System.EventHandler(this.NoseLengthTextBox_Leave);
+            this.NoseLengthTextBox.Leave += new System.EventHandler(this.OnTextBoxLeave);
             // 
             // BodyDiameterTextBox
             // 
@@ -338,7 +338,7 @@
             this.BodyDiameterTextBox.Name = "BodyDiameterTextBox";
             this.BodyDiameterTextBox.Size = new System.Drawing.Size(56, 21);
             this.BodyDiameterTextBox.TabIndex = 4;
-            this.BodyDiameterTextBox.Leave += new System.EventHandler(this.BodyDiameterTextBox_Leave);
+            this.BodyDiameterTextBox.Leave += new System.EventHandler(this.OnTextBoxLeave);
             // 
             // BodyLengthTextBox
             // 
@@ -348,7 +348,7 @@
             this.BodyLengthTextBox.Name = "BodyLengthTextBox";
             this.BodyLengthTextBox.Size = new System.Drawing.Size(56, 21);
             this.BodyLengthTextBox.TabIndex = 3;
-            this.BodyLengthTextBox.Leave += new System.EventHandler(this.BodyLengthTextBox_Leave);
+            this.BodyLengthTextBox.Leave += new System.EventHandler(this.OnTextBoxLeave);
             // 
             // NoseLengthlabel
             // 
@@ -516,7 +516,7 @@
             this.WingsCountComboBox.Name = "WingsCountComboBox";
             this.WingsCountComboBox.Size = new System.Drawing.Size(56, 23);
             this.WingsCountComboBox.TabIndex = 40;
-            this.WingsCountComboBox.SelectedValueChanged += new System.EventHandler(this.WingsCountComboBox_SelectedValueChanged);
+            this.WingsCountComboBox.SelectedValueChanged += new System.EventHandler(this.OnComboBoxSelectedValueChanged);
             // 
             // label37
             // 
@@ -545,7 +545,7 @@
             this.WingsWidthTextBox.Name = "WingsWidthTextBox";
             this.WingsWidthTextBox.Size = new System.Drawing.Size(56, 21);
             this.WingsWidthTextBox.TabIndex = 22;
-            this.WingsWidthTextBox.Leave += new System.EventHandler(this.WingsWidthTextBox_Leave);
+            this.WingsWidthTextBox.Leave += new System.EventHandler(this.OnTextBoxLeave);
             // 
             // label16
             // 
@@ -564,7 +564,7 @@
             this.WingsLengthTextBox.Name = "WingsLengthTextBox";
             this.WingsLengthTextBox.Size = new System.Drawing.Size(56, 21);
             this.WingsLengthTextBox.TabIndex = 4;
-            this.WingsLengthTextBox.Leave += new System.EventHandler(this.WingsLengthTextBox_Leave);
+            this.WingsLengthTextBox.Leave += new System.EventHandler(this.OnTextBoxLeave);
             // 
             // label14
             // 
@@ -662,7 +662,7 @@
             this.GuidingsCountComboBox.Name = "GuidingsCountComboBox";
             this.GuidingsCountComboBox.Size = new System.Drawing.Size(56, 23);
             this.GuidingsCountComboBox.TabIndex = 41;
-            this.GuidingsCountComboBox.SelectedValueChanged += new System.EventHandler(this.GuidingsCountComboBox_SelectedValueChanged);
+            this.GuidingsCountComboBox.SelectedValueChanged += new System.EventHandler(this.OnComboBoxSelectedValueChanged);
             // 
             // label38
             // 
@@ -701,7 +701,7 @@
             this.GuidingsInnerRibLengthTextBox.Name = "GuidingsInnerRibLengthTextBox";
             this.GuidingsInnerRibLengthTextBox.Size = new System.Drawing.Size(56, 21);
             this.GuidingsInnerRibLengthTextBox.TabIndex = 24;
-            this.GuidingsInnerRibLengthTextBox.Leave += new System.EventHandler(this.GuidingsInnderRibLengthTextBox_Leave);
+            this.GuidingsInnerRibLengthTextBox.Leave += new System.EventHandler(this.OnTextBoxLeave);
             // 
             // BuildButton
             // 

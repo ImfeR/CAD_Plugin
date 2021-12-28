@@ -6,21 +6,71 @@
 
     using System;
     using System.Windows.Forms;
+    using System.Collections.Generic;
 
      //TODO: XML
+
+    /// <summary>
+    /// Главная форма для создания модели.
+    /// </summary>
     public partial class MainForm : Form
     {
+        #region Fields
+
+        /// <summary>
+        /// Параметры модели.
+        /// </summary>
         private RocketParameters _parameters;
 
+        /// <summary>
+        /// Словарь с TextBox и соответствующими им именами параметрамов.
+        /// </summary>
+        private readonly Dictionary<TextBox, string> _textoBoxDictionary;
+
+        /// <summary>
+        /// Словарь с ComboBox и соответствующими им именами параметрамов.
+        /// </summary>
+        private readonly Dictionary<ComboBox, string> _comboBoxDictionary;
+
+        #endregion Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// Конструктор формы.
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
 
             _parameters = new RocketParameters();
 
+            _textoBoxDictionary = new Dictionary<TextBox, string>()
+            {
+                { BodyLengthTextBox, nameof(RocketParameters.BodyLength) },
+                { BodyDiameterTextBox, nameof(RocketParameters.BodyDiameter) },
+                { NoseLengthTextBox, nameof(RocketParameters.NoseLength) },
+                { WingsLengthTextBox, nameof(RocketParameters.WingsLength) },
+                { WingsWidthTextBox, nameof(RocketParameters.WingsWidth) },
+                { GuidingsInnerRibLengthTextBox, nameof(RocketParameters.GuidesInnerRibLength) },
+            };
+
+            _comboBoxDictionary = new Dictionary<ComboBox, string>()
+            {
+                { WingsCountComboBox, nameof(RocketParameters.WingsCount) },
+                { GuidingsCountComboBox, nameof(RocketParameters.GuidesCount) },
+            };
+
             InitState();
         }
 
+        #endregion Constructors
+
+        #region Methods
+
+        /// <summary>
+        /// Инициализация всех полей.
+        /// </summary>
         private void InitState()
         {
             BodyLengthTextBox.Text = _parameters.BodyLength.ToString();
@@ -38,66 +88,41 @@
             ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
         }
 
-        private void BodyLengthTextBox_Leave(object sender, EventArgs e)
+        /// <summary>
+        /// Обработчик события покидания поля ввода(TextBox).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnTextBoxLeave(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _parameters.BodyLength = double.Parse(BodyLengthTextBox.Text);
-            //}
-            //catch (Exception exeption)
-            //{
-            //    errorProvider.SetError(BodyLengthTextBox, exeption.Message);
-            //}
+            if (!_textoBoxDictionary.TryGetValue((TextBox)sender, out string parameterName))
+            {
+                return;
+            }
 
-            OnChangeBodyLengthParameter();
+            CheckValueInTextBox((TextBox)sender, parameterName);
+
+            if (parameterName == nameof(RocketParameters.BodyDiameter) ||
+                parameterName == nameof(RocketParameters.BodyLength))
+            {
+                ChangeMinMaxLabels(parameterName);
+                CheckValueInAllTextBox();
+            }
         }
 
-        private void BodyDiameterTextBox_Leave(object sender, EventArgs e)
+        /// <summary>
+        /// Обработчик события смены значения ComboBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnComboBoxSelectedValueChanged(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    _parameters.BodyDiameter = double.Parse(BodyDiameterTextBox.Text);
-            //}
-            //catch (Exception exeption)
-            //{
-            //    errorProvider.SetError(BodyDiameterTextBox, exeption.Message);
-            //}
+            if (!_comboBoxDictionary.TryGetValue((ComboBox)sender, out string parameterName))
+            {
+                return;
+            }
 
-            OnChangeBodyWidthParameter();
-        }
-
-        private void NoseLengthTextBox_Leave(object sender, EventArgs e)
-        {
-            CheckParameterValuesValidity();
-        }
-
-        private void WingsLengthTextBox_Leave(object sender, EventArgs e)
-        {
-            CheckParameterValuesValidity();
-        }
-
-        private void WingsWidthTextBox_Leave(object sender, EventArgs e)
-        {
-            CheckParameterValuesValidity();
-        }
-
-        private void GuidingsInnderRibLengthTextBox_Leave(object sender, EventArgs e)
-        {
-            CheckParameterValuesValidity();
-        }
-
-        private void GuidingsCountComboBox_SelectedValueChanged(object sender, EventArgs e)
-        {
-            int.TryParse(GuidingsCountComboBox.SelectedItem.ToString(), out var value);
-
-            _parameters.GuidesCount = value;
-        }
-
-        private void WingsCountComboBox_SelectedValueChanged(object sender, EventArgs e)
-        {
-            int.TryParse(WingsCountComboBox.SelectedItem.ToString(), out var value);
-
-            _parameters.WingsCount = value;
+            SetValueInComboBox((ComboBox)sender, parameterName);
         }
 
         /// <summary>
@@ -111,134 +136,127 @@
             {
                 case nameof(RocketParameters.BodyLength):
                     MinNoseLength.Text = (_parameters.BodyLength * 
-                        _parameters.MIN_NOSE_LENGTH_MULTIPLIER).ToString();
-                    MaxNoseLength.Text = (_parameters.BodyLength * 
-                        _parameters.MAX_NOSE_LENGTH_MULTIPLIER).ToString();
+                        RocketParameters.MIN_NOSE_LENGTH_MULTIPLIER).ToString();
+                    MaxNoseLength.Text = (_parameters.BodyLength *
+                        RocketParameters.MAX_NOSE_LENGTH_MULTIPLIER).ToString();
 
-                    MinWingsLength.Text = (_parameters.BodyLength * 
-                        _parameters.MIN_WING_LENGTH_MULTIPLIER).ToString();
-                    MaxWingsLength.Text = (_parameters.BodyLength * 
-                        _parameters.MAX_WING_LENGTH_MULTIPLIER).ToString();
+                    MinWingsLength.Text = (_parameters.BodyLength *
+                        RocketParameters.MIN_WING_LENGTH_MULTIPLIER).ToString();
+                    MaxWingsLength.Text = (_parameters.BodyLength *
+                        RocketParameters.MAX_WING_LENGTH_MULTIPLIER).ToString();
 
-                    MinGuidesInnerRibLength.Text = (_parameters.BodyLength * 
-                        _parameters.MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER).ToString();
-                    MaxGuidesInnerRibLength.Text = (_parameters.BodyLength * 
-                        _parameters.MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER).ToString();
+                    MinGuidesInnerRibLength.Text = (_parameters.BodyLength *
+                        RocketParameters.MIN_GUIDES_INNER_RIB_LENGTH_MULTIPLIER).ToString();
+                    MaxGuidesInnerRibLength.Text = (_parameters.BodyLength *
+                        RocketParameters.MAX_GUIDES_INNER_RIB_LENGTH_MULTIPLIER).ToString();
 
                     MinBodyDiameter.Text = (_parameters.BodyLength *
-                        _parameters.MIN_BODY_DIAMTER_MULTIPLIER).ToString();
-                    MaxBodyDiameter.Text = (_parameters.BodyLength * 
-                        _parameters.MAX_BODY_DIAMTER_MULTIPLIER).ToString();
+                        RocketParameters.MIN_BODY_DIAMTER_MULTIPLIER).ToString();
+                    MaxBodyDiameter.Text = (_parameters.BodyLength *
+                        RocketParameters.MAX_BODY_DIAMTER_MULTIPLIER).ToString();
                     break;
                 case nameof(RocketParameters.BodyDiameter):
-                    MaxWingsWidth.Text = (_parameters.BodyDiameter * 
-                        _parameters.MAX_WING_WIDTH_MULTIPLIER).ToString();
-                    MinWingsWidth.Text = (_parameters.BodyDiameter * 
-                        _parameters.MIN_WING_WIDTH_MULTIPLIER).ToString();
+                    MaxWingsWidth.Text = (_parameters.BodyDiameter *
+                        RocketParameters.MAX_WING_WIDTH_MULTIPLIER).ToString();
+                    MinWingsWidth.Text = (_parameters.BodyDiameter *
+                        RocketParameters.MIN_WING_WIDTH_MULTIPLIER).ToString();
                     break;
             }
         }
 
         //TODO: Дубли
-        private void OnChangeBodyLengthParameter()
-        {
-            CheckParameterValuesValidity();
+        // Были дубли методов проверки значений и их установка 
+        // для BodyLengthTextBox и BodyDiameterTextBox
 
-            if(errorProvider.GetError(BodyLengthTextBox) == string.Empty)
+        //TODO: Дубли
+        // Был метод с множественнымы try catch, в связи с добавление CheckValueInTextBox
+        // избавился от него в принципе
+
+        /// <summary>
+        /// Проверка и установка значения из поля ввода.
+        /// </summary>
+        /// <param name="textBox">Элемент управления <see cref="TextBox">.</param>
+        /// <param name="propertyName">Название изменяемого параметра.</param>
+        private void CheckValueInTextBox(TextBox textBox, string propertyName)
+        {
+            try
             {
-                ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
+                errorProvider.SetError(textBox, string.Empty);
+
+                var propertyInfo = typeof(RocketParameters).
+                    GetProperty(propertyName);
+                propertyInfo.SetValue(_parameters, 
+                    double.Parse(textBox.Text));
             }
-        }
-
-        private void OnChangeBodyWidthParameter()
-        {
-            CheckParameterValuesValidity();
-
-            if (errorProvider.GetError(BodyDiameterTextBox) == string.Empty)
+            catch (Exception e)
             {
-                ChangeMinMaxLabels(nameof(RocketParameters.BodyDiameter));
+                if(e.InnerException != null)
+                {
+                    errorProvider.SetError(textBox, e.InnerException.Message);
+                }
+                else
+                {
+                    errorProvider.SetError(textBox, e.Message);
+                }
+            }
+            finally
+            {
+                SetBuildButtonStatus();
             }
         }
 
         /// <summary>
-        /// Проверка всех значений на валидносить.
+        /// Установка значения из ComboBox.
         /// </summary>
-        private void CheckParameterValuesValidity()
+        /// <param name="comboBox">Элемент управления <see cref="ComboBox">.</param>
+        /// <param name="propertyName">Название изменяемого параметра.</param>
+        private void SetValueInComboBox(ComboBox comboBox, string propertyName)
         {
-            BuildButton.Enabled = true;
-            errorProvider.Clear();
+            var propertyInfo = typeof(RocketParameters).
+                GetProperty(propertyName);
+            propertyInfo.SetValue(_parameters,
+                int.Parse(comboBox.SelectedIndex.ToString()));
+        }
 
-            //TODO: Дубли
-            try
+        /// <summary>
+        /// Проверка всех значений в полях ввода на валидность.
+        /// </summary>
+        private void CheckValueInAllTextBox()
+        {
+            foreach(var pair in _textoBoxDictionary)
             {
-                _parameters.BodyLength = double.Parse(BodyLengthTextBox.Text);
-            }
-            catch (Exception e)
-            {
-                errorProvider.SetError(BodyLengthTextBox, e.Message);
-                BuildButton.Enabled = false;
-            }
-
-            try
-            {
-                _parameters.BodyDiameter = double.Parse(BodyDiameterTextBox.Text);
-            }
-            catch (Exception e)
-            {
-                errorProvider.SetError(BodyDiameterTextBox, e.Message);
-                BuildButton.Enabled = false;
-            }
-
-            try
-            {
-                _parameters.NoseLength = double.Parse(NoseLengthTextBox.Text);
-            }
-            catch (Exception e)
-            {
-                errorProvider.SetError(NoseLengthTextBox, e.Message);
-                BuildButton.Enabled = false;
-            }
-
-            try
-            {
-                _parameters.WingsLength = double.Parse(WingsLengthTextBox.Text);
-            }
-            catch (Exception e)
-            {
-                errorProvider.SetError(WingsLengthTextBox, e.Message);
-                BuildButton.Enabled = false;
-            }
-
-            try
-            {
-                _parameters.WingsWidth = double.Parse(WingsWidthTextBox.Text);
-            }
-            catch (Exception e)
-            {
-                errorProvider.SetError(WingsWidthTextBox, e.Message);
-                BuildButton.Enabled = false;
-            }
-
-            try
-            {
-                _parameters.GuidesInnerRibLength = double.Parse(GuidingsInnerRibLengthTextBox.Text);
-            }
-            catch (Exception e)
-            {
-                errorProvider.SetError(GuidingsInnerRibLengthTextBox, e.Message);
-                BuildButton.Enabled = false;
+                CheckValueInTextBox(pair.Key, pair.Value);
             }
         }
 
+        /// <summary>
+        /// Проверка на наличие не валидных данных и включение/выключение кнопки.
+        /// </summary>
+        private void SetBuildButtonStatus()
+        {
+            BuildButton.Enabled = true;
+
+            foreach (var control in _textoBoxDictionary.Keys)
+            {
+                if(errorProvider.GetError(control) != string.Empty)
+                {
+                    BuildButton.Enabled = false;
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обработчик события нажатия на кнопку "Построить".
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            CheckParameterValuesValidity();
-
-            if (!BuildButton.Enabled)
-                return;
-
             RocketBuilder builder = new RocketBuilder(_parameters);
             builder.Build();
         }
+
+        #endregion Methods
     }
 }
