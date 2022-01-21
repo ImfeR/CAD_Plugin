@@ -116,7 +116,8 @@
         /// <param name="e"></param>
         private void OnTextBoxLeave(object sender, EventArgs e)
         {
-            if (!_textoBoxDictionary.TryGetValue((TextBox)sender, out string parameterName))
+            if (!_textoBoxDictionary.TryGetValue((TextBox)sender, 
+                out string parameterName))
             {
                 return;
             }
@@ -138,7 +139,8 @@
         /// <param name="e"></param>
         private void OnComboBoxSelectedValueChanged(object sender, EventArgs e)
         {
-            if (!_comboBoxDictionary.TryGetValue((ComboBox)sender, out string parameterName))
+            if (!_comboBoxDictionary.TryGetValue((ComboBox)sender, 
+                out string parameterName))
             {
                 return;
             }
@@ -289,7 +291,7 @@
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BuildButton_Click(object sender, EventArgs e)
+        private void OnBuildButtonClick(object sender, EventArgs e)
         {
             RocketBuilder builder = new RocketBuilder(_parameters);
             builder.Build();

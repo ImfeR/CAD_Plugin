@@ -715,7 +715,7 @@
             this.BuildButton.TabIndex = 4;
             this.BuildButton.Text = "Построить";
             this.BuildButton.UseVisualStyleBackColor = true;
-            this.BuildButton.Click += new System.EventHandler(this.BuildButton_Click);
+            this.BuildButton.Click += new System.EventHandler(this.OnBuildButtonClick);
             // 
             // toolTip1
             // 
