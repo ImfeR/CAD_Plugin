@@ -32,6 +32,11 @@
         /// </summary>
         private readonly Dictionary<ComboBox, string> _comboBoxDictionary;
 
+        /// <summary>
+        /// Словарь с типами направляющих и соответсвующему им названиями.
+        /// </summary>
+        private readonly Dictionary<GuidesType, string> _guidesTypeToStringDictionary;
+
         #endregion Fields
 
         #region Constructors
@@ -61,6 +66,18 @@
                 { GuidingsCountComboBox, nameof(RocketParameters.GuidesCount) },
             };
 
+            _guidesTypeToStringDictionary = new Dictionary<GuidesType, string>()
+            {
+                { GuidesType.Trapezoid, "Трапециевидный" },
+                { GuidesType.Rectangle, "Прямоугольный" },
+                { GuidesType.Triangle, "Треугольный" },
+            };
+
+            foreach (var pair in _guidesTypeToStringDictionary)
+            {
+                GuidesTypeComboBox.Items.Add(pair.Value);
+            }
+
             InitState();
         }
 
@@ -84,6 +101,10 @@
             GuidingsCountComboBox.SelectedItem = _parameters.GuidesCount.ToString();
             GuidingsInnerRibLengthTextBox.Text = _parameters.GuidesInnerRibLength.ToString();
 
+            _guidesTypeToStringDictionary.TryGetValue(_parameters.GuidesType,
+                out string guidesTypeString);
+            GuidesTypeComboBox.SelectedItem = guidesTypeString;
+
             ChangeMinMaxLabels(nameof(RocketParameters.BodyDiameter));
             ChangeMinMaxLabels(nameof(RocketParameters.BodyLength));
         }
@@ -95,7 +116,8 @@
         /// <param name="e"></param>
         private void OnTextBoxLeave(object sender, EventArgs e)
         {
-            if (!_textoBoxDictionary.TryGetValue((TextBox)sender, out string parameterName))
+            if (!_textoBoxDictionary.TryGetValue((TextBox)sender, 
+                out string parameterName))
             {
                 return;
             }
@@ -117,12 +139,30 @@
         /// <param name="e"></param>
         private void OnComboBoxSelectedValueChanged(object sender, EventArgs e)
         {
-            if (!_comboBoxDictionary.TryGetValue((ComboBox)sender, out string parameterName))
+            if (!_comboBoxDictionary.TryGetValue((ComboBox)sender, 
+                out string parameterName))
             {
                 return;
             }
 
             SetValueInComboBox((ComboBox)sender, parameterName);
+        }
+
+        /// <summary>
+        /// Обработчик события при смене значения GuidesTypeComboBox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnGuidesTypeComboBoxSelectedValueChanged(object sender, EventArgs e)
+        {
+            foreach( var pair in _guidesTypeToStringDictionary)
+            {
+                if(pair.Value == GuidesTypeComboBox.SelectedItem.ToString())
+                {
+                    _parameters.GuidesType = pair.Key;
+                    return;
+                }
+            } 
         }
 
         /// <summary>
@@ -215,7 +255,7 @@
             var propertyInfo = typeof(RocketParameters).
                 GetProperty(propertyName);
             propertyInfo.SetValue(_parameters,
-                int.Parse(comboBox.SelectedIndex.ToString()));
+                int.Parse(comboBox.SelectedItem.ToString()));
         }
 
         /// <summary>
@@ -251,7 +291,7 @@
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void BuildButton_Click(object sender, EventArgs e)
+        private void OnBuildButtonClick(object sender, EventArgs e)
         {
             RocketBuilder builder = new RocketBuilder(_parameters);
             builder.Build();

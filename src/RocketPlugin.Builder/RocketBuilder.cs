@@ -133,6 +133,7 @@
                     double wingsDepth = _parameters.WingsDepth;
                     double wingsLength = _parameters.WingsLength;
                     double wingsWidth = _parameters.WingsWidth;
+                    GuidesType guidType = _parameters.GuidesType;
 
                     // Создание корпуса ракеты и смещение его на позицию 0, 0, 0.
                     var body = CreateBodyOrNose(bodyLength, bodyRadius, 
@@ -150,26 +151,49 @@
                         nose);
 
                     // Создание крыла ракеты.
-                    var wing = CreateWedge(wingsWidth, wingsDepth, wingsLength);
-                    wing.TransformBy(Matrix3d.Displacement(
-                        new Point3d(bodyRadius + wingsWidth / 2, 0, wingsLength / 2)
-                        - Point3d.Origin));
+                    if (wingsCount != 0)
+                    {
+                        var wing = CreateWedge(wingsWidth, wingsDepth, wingsLength);
+                        wing.TransformBy(Matrix3d.Displacement(
+                            new Point3d(bodyRadius + wingsWidth / 2, 0, wingsLength / 2)
+                            - Point3d.Origin));
 
-                    body = ApplyPolarArrayOnBody(body, wingsCount, wing);
+                        body = ApplyPolarArrayOnBody(body, wingsCount, wing);
+                    }
 
                     // Создание направляющей ракеты.
-                    var Guides = CreateGuides(guidesWidth, guidesDepth, 
-                        guidesOuterRib, guidesInnerRib);
+                    if (guidesCount != 0)
+                    {
+                        Solid3d guides = new Solid3d();
+                        switch (guidType)
+                        {
+                            case GuidesType.Trapezoid:
+                                guides = CreateTrapezoidGuides(guidesWidth,
+                                    guidesDepth, guidesOuterRib, guidesInnerRib);
+                                break;
+                            case GuidesType.Rectangle:
+                                guides.CreateBox(guidesWidth, guidesDepth,
+                                    guidesInnerRib);
+                                break;
+                            case GuidesType.Triangle:
+                                guides.CreateWedge(guidesWidth, guidesDepth,
+                                    guidesInnerRib);
+                                break;
+                            default:
+                                guides = new Solid3d();
+                                break;
+                        }
 
-                    var guidesShiftDistanceZ = (guidesInnerRib / 2) + 
-                        (bodyLength / 2);
-                    var guidesShiftDistanceX = bodyRadius + 
-                        (guidesWidth / 2);
-                    Guides.TransformBy(Matrix3d.Displacement(
-                        new Point3d(guidesShiftDistanceX, 0, guidesShiftDistanceZ) 
-                        - Point3d.Origin));
+                        var guidesShiftDistanceZ = (guidesInnerRib / 2) +
+                            (bodyLength / 2);
+                        var guidesShiftDistanceX = bodyRadius +
+                            (guidesWidth / 2);
+                        guides.TransformBy(Matrix3d.Displacement(
+                            new Point3d(guidesShiftDistanceX, 0, guidesShiftDistanceZ)
+                            - Point3d.Origin));
 
-                    body = ApplyPolarArrayOnBody(body, guidesCount, Guides);
+                        body = ApplyPolarArrayOnBody(body, guidesCount, guides);
+                    }
 
                     // Добавление модели ракеты в транзакцию
                     blockTableRecord.AppendEntity(body);
@@ -224,7 +248,7 @@
         private Solid3d ApplyPolarArrayOnBody(Solid3d body, 
             int elementsCount, Solid3d element)
         {
-            double angle = 2 / elementsCount * Math.PI;
+            double angle = 360 / elementsCount * Math.PI / 180;
 
             for (int i = 0; i < elementsCount; i++)
             {
@@ -255,14 +279,14 @@
         }
 
         /// <summary>
-        /// Создание направялющей ракеты.
+        /// Создание направялющей ракеты трапециевидной формы.
         /// </summary>
         /// <param name="width">Ширина направляющей</param>
         /// <param name="depth">Толщина направляющей</param>
         /// <param name="outerRibLength">Внешняя грань направляющей.</param>
         /// <param name="innerRibLength">Внутренняя грань направляющей.</param>
         /// <returns>Построенная и смещенная на необходимое значение направляющая</returns>
-        private Solid3d CreateGuides(double width, double depth, 
+        private Solid3d CreateTrapezoidGuides(double width, double depth, 
             double outerRibLength, double innerRibLength)
         {
             var guides = new Solid3d();
@@ -272,19 +296,34 @@
             var wedgeShiftDistance = (outerRibLength + wedgeLength) / 2;
 
             //TODO: Дубли
-            var topPartGuides = CreateWedge(width, depth, wedgeLength);
-            topPartGuides.TransformBy(Matrix3d.Displacement(
-                new Point3d(0, 0, wedgeShiftDistance) - Point3d.Origin));
-            guides.BooleanOperation(BooleanOperationType.BoolUnite, 
-                topPartGuides);
 
-            var bottomPartGuides = CreateWedge(width, depth, -wedgeLength);
-            bottomPartGuides.TransformBy(Matrix3d.Displacement(
-                new Point3d(0, 0, -wedgeShiftDistance) - Point3d.Origin));
-            guides.BooleanOperation(BooleanOperationType.BoolUnite, 
-                bottomPartGuides);
+            guides.BooleanOperation(BooleanOperationType.BoolUnite,
+                CreateTrapezoidGuidesPart(width, depth, wedgeLength,
+                wedgeShiftDistance));
+
+            guides.BooleanOperation(BooleanOperationType.BoolUnite,
+                CreateTrapezoidGuidesPart(width, depth, -wedgeLength,
+                -wedgeShiftDistance));
 
             return guides;
+        }
+
+        /// <summary>
+        /// Создает часть направялющей.
+        /// </summary>
+        /// <param name="width">Ширина части.</param>
+        /// <param name="depth">Толщина части.</param>
+        /// <param name="length">Длина части.</param>
+        /// <param name="shiftDistanceZ">Растояние смещения по оси Z</param>
+        /// <returns>Часть направляющей в виде объекта <see cref="Solid3d"></returns>
+        private Solid3d CreateTrapezoidGuidesPart(double width, double depth,
+            double length, double shiftDistanceZ)
+        {
+            var guidesPart = CreateWedge(width, depth, length);
+            guidesPart.TransformBy(Matrix3d.Displacement(
+                new Point3d(0, 0, shiftDistanceZ) - Point3d.Origin));
+
+            return guidesPart;
         }
 
         #endregion Methods

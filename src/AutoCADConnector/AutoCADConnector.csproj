@@ -66,6 +66,7 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <!--ACA References Begin-->
     <!--ACA Refences End-->
     <!--AME Referebces Begin-->
@@ -79,13 +80,21 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RocketPlugin.BL\RocketPlugin.BL.csproj">
+      <Project>{08ca8ab3-1b8d-48c1-8589-7aa7a7f0cdb2}</Project>
+      <Name>RocketPlugin.BL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RocketPlugin.Builder\RocketPlugin.Builder.csproj">
+      <Project>{34103dae-18cc-4492-b2ae-e9f18d892c1b}</Project>
+      <Name>RocketPlugin.Builder</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RocketPlugin.UI\RocketPlugin.UI.csproj">
       <Project>{ab489376-a1f9-43b1-bd46-35369e849795}</Project>
       <Name>RocketPlugin.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StartPluginCommand.cs" />
+    <Compile Include="AutoCADConnector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
