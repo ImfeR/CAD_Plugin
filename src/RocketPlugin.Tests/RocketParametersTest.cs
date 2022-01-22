@@ -138,6 +138,7 @@
             var expectedWingsDepth = 0.25;
             var expectedWingsLength = 4;
             var expectedWingsWidth = 0.625;
+            var expectedGuidesType = GuidesType.Trapezoid;
 
             RocketParameters rocketParameters = new RocketParameters();
 
@@ -155,6 +156,7 @@
                 Assert.AreEqual(expectedWingsDepth, rocketParameters.WingsDepth);
                 Assert.AreEqual(expectedWingsLength, rocketParameters.WingsLength);
                 Assert.AreEqual(expectedWingsWidth, rocketParameters.WingsWidth);
+                Assert.AreEqual(expectedGuidesType, rocketParameters.GuidesType);
             });
         }
     }
