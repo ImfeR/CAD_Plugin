@@ -99,7 +99,8 @@
             WingsWidthTextBox.Text = _parameters.WingsWidth.ToString();
 
             GuidingsCountComboBox.SelectedItem = _parameters.GuidesCount.ToString();
-            GuidingsInnerRibLengthTextBox.Text = _parameters.GuidesInnerRibLength.ToString();
+            GuidingsInnerRibLengthTextBox.Text = _parameters.GuidesInnerRibLength
+                .ToString();
 
             _guidesTypeToStringDictionary.TryGetValue(_parameters.GuidesType,
                 out string guidesTypeString);
@@ -116,19 +117,17 @@
         /// <param name="e"></param>
         private void OnTextBoxLeave(object sender, EventArgs e)
         {
-            if (!_textoBoxDictionary.TryGetValue((TextBox)sender, 
+            if (_textoBoxDictionary.TryGetValue((TextBox)sender, 
                 out string parameterName))
             {
-                return;
-            }
+                CheckValueInTextBox((TextBox)sender, parameterName);
 
-            CheckValueInTextBox((TextBox)sender, parameterName);
-
-            if (parameterName == nameof(RocketParameters.BodyDiameter) ||
-                parameterName == nameof(RocketParameters.BodyLength))
-            {
-                ChangeMinMaxLabels(parameterName);
-                CheckValueInAllTextBox();
+                if (parameterName == nameof(RocketParameters.BodyDiameter) ||
+                    parameterName == nameof(RocketParameters.BodyLength))
+                {
+                    ChangeMinMaxLabels(parameterName);
+                    CheckValueInAllTextBox();
+                }
             }
         }
 
@@ -139,13 +138,11 @@
         /// <param name="e"></param>
         private void OnComboBoxSelectedValueChanged(object sender, EventArgs e)
         {
-            if (!_comboBoxDictionary.TryGetValue((ComboBox)sender, 
+            if (_comboBoxDictionary.TryGetValue((ComboBox)sender, 
                 out string parameterName))
             {
-                return;
+                SetValueInComboBox((ComboBox)sender, parameterName);
             }
-
-            SetValueInComboBox((ComboBox)sender, parameterName);
         }
 
         /// <summary>

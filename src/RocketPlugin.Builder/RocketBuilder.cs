@@ -164,25 +164,8 @@
                     // Создание направляющей ракеты.
                     if (guidesCount != 0)
                     {
-                        Solid3d guides = new Solid3d();
-                        switch (guidType)
-                        {
-                            case GuidesType.Trapezoid:
-                                guides = CreateTrapezoidGuides(guidesWidth,
-                                    guidesDepth, guidesOuterRib, guidesInnerRib);
-                                break;
-                            case GuidesType.Rectangle:
-                                guides.CreateBox(guidesWidth, guidesDepth,
-                                    guidesInnerRib);
-                                break;
-                            case GuidesType.Triangle:
-                                guides.CreateWedge(guidesWidth, guidesDepth,
-                                    guidesInnerRib);
-                                break;
-                            default:
-                                guides = new Solid3d();
-                                break;
-                        }
+                        Solid3d guides = CreateGuides(guidesWidth,
+                            guidesDepth, guidesOuterRib, guidesInnerRib, guidType);
 
                         var guidesShiftDistanceZ = (guidesInnerRib / 2) +
                             (bodyLength / 2);
@@ -276,6 +259,38 @@
             wing.CreateWedge(width, depth, length);
 
             return wing;
+        }
+
+        /// <summary>
+        /// Создание направляющей ракеты.
+        /// </summary>
+        /// <param name="guidesWidth">Ширина направляющих.</param>
+        /// <param name="guidesDepth">Толщина направляющих.</param>
+        /// <param name="guidesOuterRib">Длина внешней грани направляющей.</param>
+        /// <param name="guidesInnerRib">Длина внутренней грани направляющей.</param>
+        /// <param name="guidType">Тип направляющей.</param>
+        /// <returns>Направляющая ракеты.</returns>
+        private Solid3d CreateGuides(double guidesWidth, double guidesDepth, 
+            double guidesOuterRib, double guidesInnerRib, GuidesType guidType)
+        {
+            Solid3d guides = new Solid3d();
+
+            switch (guidType)
+            {
+                case GuidesType.Trapezoid:
+                    return CreateTrapezoidGuides(guidesWidth,
+                        guidesDepth, guidesOuterRib, guidesInnerRib);
+                case GuidesType.Rectangle:
+                    guides.CreateBox(guidesWidth, guidesDepth,
+                        guidesInnerRib);
+                    return guides;
+                case GuidesType.Triangle:
+                    guides.CreateWedge(guidesWidth, guidesDepth,
+                        guidesInnerRib);
+                    return guides;
+                default:
+                    return new Solid3d();
+            }
         }
 
         /// <summary>
