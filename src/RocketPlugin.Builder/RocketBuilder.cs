@@ -14,9 +14,7 @@
     public class RocketBuilder
     {
         #region Fields
-
-         //TODO: XML
-
+        
         /// <summary>
         /// Параметры модели.
         /// </summary>
@@ -309,8 +307,6 @@
 
             var wedgeLength = (innerRibLength - outerRibLength) / 2;
             var wedgeShiftDistance = (outerRibLength + wedgeLength) / 2;
-
-            //TODO: Дубли
 
             guides.BooleanOperation(BooleanOperationType.BoolUnite,
                 CreateTrapezoidGuidesPart(width, depth, wedgeLength,

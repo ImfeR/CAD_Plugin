@@ -33,7 +33,6 @@
         #endregion
 
         #region Fields
-        //TODO: XML
 
         /// <summary>
         /// Диаметр корпуса.

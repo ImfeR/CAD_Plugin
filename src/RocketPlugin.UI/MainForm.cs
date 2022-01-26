@@ -7,9 +7,7 @@
     using System;
     using System.Windows.Forms;
     using System.Collections.Generic;
-
-     //TODO: XML
-
+    
     /// <summary>
     /// Главная форма для создания модели.
     /// </summary>
@@ -201,14 +199,6 @@
             }
         }
 
-        //TODO: Дубли
-        // Были дубли методов проверки значений и их установка 
-        // для BodyLengthTextBox и BodyDiameterTextBox
-
-        //TODO: Дубли
-        // Был метод с множественнымы try catch, в связи с добавление CheckValueInTextBox
-        // избавился от него в принципе
-
         /// <summary>
         /// Проверка и установка значения из поля ввода.
         /// </summary>
@@ -227,14 +217,10 @@
             }
             catch (Exception e)
             {
-                if(e.InnerException != null)
-                {
-                    errorProvider.SetError(textBox, e.InnerException.Message);
-                }
-                else
-                {
-                    errorProvider.SetError(textBox, e.Message);
-                }
+                errorProvider.SetError(textBox, 
+                    e.InnerException != null 
+                        ? e.InnerException.Message 
+                        : e.Message);
             }
             finally
             {
@@ -275,11 +261,10 @@
 
             foreach (var control in _textoBoxDictionary.Keys)
             {
-                if(errorProvider.GetError(control) != string.Empty)
-                {
-                    BuildButton.Enabled = false;
-                    return;
-                }
+                if (errorProvider.GetError(control) == string.Empty) continue;
+
+                BuildButton.Enabled = false;
+                return;
             }
         }
 

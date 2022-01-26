@@ -1,5 +1,6 @@
 ﻿namespace RocketPlugin.BL
 {
+    //TODO: XML
     public enum GuidesType
     {
         Trapezoid = 0,
