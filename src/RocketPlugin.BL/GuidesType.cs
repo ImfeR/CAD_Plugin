@@ -1,6 +1,5 @@
 ﻿namespace RocketPlugin.BL
 {
-    //TODO: XML
     /// <summary>
     /// Тип направляющей ракеты.
     /// </summary>
